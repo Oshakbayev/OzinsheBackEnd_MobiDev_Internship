@@ -32,5 +32,5 @@ func main() {
 		logger.Printf("Emergency:Server crushed!!!")
 		log.Fatal(err)
 	}
-	fmt.Println("check of new git configs")
+	fmt.Println("check of new .gitignore file")
 }
