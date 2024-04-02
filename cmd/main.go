@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"io"
@@ -31,4 +32,5 @@ func main() {
 		logger.Printf("Emergency:Server crushed!!!")
 		log.Fatal(err)
 	}
+	fmt.Println("check of new git configs")
 }
