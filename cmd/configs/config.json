@@ -1,0 +1,5 @@
+{
+  "HTTPPort": ":80",
+  "DBAddr": "./data/postgres.db",
+  "DBDriver": "postgres"
+}
