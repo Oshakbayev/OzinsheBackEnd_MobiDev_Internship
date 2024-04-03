@@ -6,6 +6,7 @@ import (
 )
 
 type SvcInterface interface {
+	AuthService
 }
 
 type Service struct {
@@ -14,5 +15,5 @@ type Service struct {
 }
 
 func CreateService(repo repository.RepoInterface, logger *log.Logger) SvcInterface {
-	return Service{repo: repo, log: logger}
+	return &Service{repo: repo, log: logger}
 }

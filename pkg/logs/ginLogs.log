@@ -64,3 +64,245 @@ Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-
 [GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
 Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
 [GIN-debug] Listening and serving HTTP on :80
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/internal/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :80
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/internal/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] GET    /swagger/*any             --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :80
+[GIN] 2024/04/03 - 18:41:41 | 404 |            0s |       127.0.0.1 | GET      "/"
+[GIN] 2024/04/03 - 18:41:42 | 404 |            0s |       127.0.0.1 | GET      "/favicon.ico"
+[GIN] 2024/04/03 - 18:41:55 | 200 |            0s |       127.0.0.1 | GET      "/home"
+[GIN] 2024/04/03 - 18:41:55 | 404 |            0s |       127.0.0.1 | GET      "/favicon.ico"
+[GIN-debug] redirecting request 301: /swagger/ --> /swagger/
+[GIN] 2024/04/03 - 18:41:59 | 404 |            0s |       127.0.0.1 | GET      "/swagger/"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/internal/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] GET    /swagger/                 --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :80
+[GIN] 2024/04/03 - 18:56:54 | 404 |            0s |       127.0.0.1 | GET      "/swagger/"
+[GIN] 2024/04/03 - 18:56:58 | 404 |            0s |       127.0.0.1 | GET      "/swagger/"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/internal/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on :80
+[GIN-debug] redirecting request 301: /swagger --> /swagger
+[GIN] 2024/04/03 - 18:57:20 | 404 |            0s |       127.0.0.1 | GET      "/swagger"
+[GIN] 2024/04/03 - 18:57:52 | 200 |       930.2µs |       127.0.0.1 | GET      "/home"
+[GIN] 2024/04/03 - 18:58:01 | 404 |            0s |       127.0.0.1 | GET      "/swagger"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/internal/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/internal/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/03 - 19:47:49 | 200 |       519.1µs |             ::1 | GET      "/home"
+[GIN] 2024/04/03 - 19:47:49 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN] 2024/04/03 - 19:47:55 | 404 |       101.8µs |             ::1 | GET      "/swagger"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/03 - 23:08:49 | 404 |            0s |             ::1 | GET      "/auth/sign-up"
+[GIN] 2024/04/03 - 23:09:00 | 500 |    278.1127ms |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/03 - 23:15:40 | 500 |     382.381ms |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/03 - 23:16:17 | 200 |    3.9003237s |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:11:18 | 404 |            0s |             ::1 | GET      "/$2a$10$Hshfb0qvGbwLxg6tyTKeweF/cj9QQWFuWGQvQ3o/dtkI6pLnoxV72"
+[GIN] 2024/04/04 - 00:11:18 | 404 |            0s |             ::1 | GET      "/favicon.ico"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:12:50 | 500 |    4.0809385s |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:14:12 | 500 |    3.6403396s |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:16:25 | 500 |    3.6648524s |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:17:08 | 200 |    3.8200632s |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:22:08 | 200 |    3.8340066s |             ::1 | POST     "/auth/sign-up"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:24:42 | 200 |    4.0118605s |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:25:12 | 404 |            0s |             ::1 | GET      "/confirmUserAccount?link=$2a$10$ALk5XrvIQnWgJ8oDDbiDXOtZ55DEmfpaAS.Kov8r2R9wVJ6uz46rS"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:29:24 | 200 |    4.3214755s |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:29:35 | 200 |    214.5304ms |             ::1 | GET      "/auth/verifyAccount?link=$2a$10$bBD/GGKMYQS0duyQ1Y2Lve9NLfBT3KpFIofN/a4HqiB.GyW5ykYXq"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:33:11 | 200 |    1.4109407s |             ::1 | GET      "/auth/verifyAccount?link=$2a$10$bBD/GGKMYQS0duyQ1Y2Lve9NLfBT3KpFIofN/a4HqiB.GyW5ykYXq"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /home                     --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/04 - 00:34:37 | 400 |     380.999ms |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:35:12 | 500 |    2.7787353s |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:36:14 | 400 |    271.8354ms |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:36:25 | 500 |    1.8689205s |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:36:47 | 400 |            0s |             ::1 | POST     "/auth/sign-up"
+[GIN] 2024/04/04 - 00:37:47 | 400 |    227.3433ms |             ::1 | GET      "/auth/verifyAccount?link=$2a$10$bBD/GGKMYQS0duyQ1Y2Lve9NLfBT3KpFIofN/a4HqiB.GyW5ykYXqdxasd"

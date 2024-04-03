@@ -1,42 +1,26 @@
 package server
 
 import (
-	"fmt"
-	"github.com/gin-gonic/gin"
-	"log"
-	"ozinshe/cmd/configs"
-	handlers "ozinshe/internal/handler"
-	"ozinshe/pkg/repository"
-	"ozinshe/pkg/repository/database"
-	services "ozinshe/pkg/service"
+	"context"
+	"net/http"
+	"time"
 )
 
 type Server struct {
-	Address string
-	log     *log.Logger
-	server  *gin.Engine
+	server *http.Server
 }
 
-func (s *Server) Run() error {
-	s.log.Println("starting api server at http://localhost" + s.Address)
-	fmt.Println("starting api server at http://localhost" + s.Address)
-	return s.server.Run(s.Address)
+func (s *Server) InitServerAndRun(HTTPPort string, handler http.Handler) error {
+	s.server = &http.Server{
+		Addr:           HTTPPort,
+		Handler:        handler,
+		MaxHeaderBytes: 1 << 20, // 1 MB
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+	}
+	return s.server.ListenAndServe()
 }
 
-func InitServer(config *configs.Config, errLogger *log.Logger) *Server {
-	db, err := database.CreateDB(config.DBDriver, config.DSN)
-	if err != nil {
-		errLogger.Println(err)
-		log.Fatal(err)
-	}
-	repo := repository.CreateRepository(db, errLogger)
-	service := services.CreateService(repo, errLogger)
-	handler := handlers.CreateHandler(service, errLogger)
-	ginServer := gin.Default()
-	handler.InitRoutes(ginServer)
-	return &Server{
-		Address: config.HTTPPort,
-		log:     errLogger,
-		server:  ginServer,
-	}
+func (s *Server) Shutdown(ctx context.Context) error {
+	return s.server.Shutdown(ctx)
 }

@@ -1,18 +1,21 @@
 package repository
 
 import (
-	"gorm.io/gorm"
+	"github.com/jackc/pgx/v5/pgxpool"
 	"log"
 )
 
 type RepoInterface interface {
+	UserRepo
+	AuthRepo
+	VerificationEmailRepo
 }
 
 type RepoStruct struct {
 	log *log.Logger
-	db  *gorm.DB
+	db  *pgxpool.Pool
 }
 
-func CreateRepository(db *gorm.DB, log *log.Logger) RepoInterface {
-	return RepoStruct{db: db, log: log}
+func CreateRepository(db *pgxpool.Pool, log *log.Logger) RepoInterface {
+	return &RepoStruct{db: db, log: log}
 }

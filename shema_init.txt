@@ -1,0 +1,15 @@
+CREATE TABLE users (
+	id            serial       not null unique,
+	email varchar  not null unique,
+	password_hash varchar,
+	is_email_verified bool default false
+)
+
+CREATE TABLE verification_emails (
+	 id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL ,
+    email_message VARCHAR NOT NULL,
+    secret_code VARCHAR NOT NULL,
+    is_used BOOLEAN DEFAULT false,
+    expired_at TIMESTAMPTZ NOT NULL DEFAULT NOW() + INTERVAL '48 hours'
+)

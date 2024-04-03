@@ -16,3 +16,10 @@ func CreateLogFile(fileName string) *os.File {
 func NewLogger(logFile *os.File) *log.Logger {
 	return log.New(logFile, "---New log line---", log.Ldate|log.Ltime)
 }
+
+func CloseLogFile(logFile *os.File) {
+	err := logFile.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+}
