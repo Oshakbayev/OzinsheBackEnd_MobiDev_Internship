@@ -1,5 +1,6 @@
 {
   "HTTPPort": ":80",
   "DBAddr": "./data/postgres.db",
-  "DBDriver": "postgres"
+  "DBDriver": "postgres",
+  "DSN": "postgres://favjwxsb:YL2K6PoVgOBg49czYfjCTYZOilphCAU2@cornelius.db.elephantsql.com/favjwxsb"
 }

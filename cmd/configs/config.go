@@ -9,6 +9,7 @@ type Config struct {
 	HTTPPort string `json:"HTTPPort"`
 	DBAddr   string `json:"DBAddr"`
 	DBDriver string `json:"DBDriver"`
+	DSN      string `json:"DSN"`
 }
 
 func CreateConfig() Config {

@@ -1,15 +1,22 @@
 package database
 
 import (
-	"database/sql"
-	"log"
+	"fmt"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-func CreateDB(DBDriver string) *sql.DB {
-	DBconnectionString := "postgres://favjwxsb:YL2K6PoVgOBg49czYfjCTYZOilphCAU2@cornelius.db.elephantsql.com/favjwxsb"
-	db, err := sql.Open(DBDriver, DBconnectionString)
-	if err != nil {
-		log.Fatal(err)
+func CreateDB(DBDriver, dsn string) (*gorm.DB, error) {
+	var dialector gorm.Dialector
+	switch DBDriver {
+	case "postgres":
+		dialector = postgres.Open(dsn)
+	default:
+		return nil, fmt.Errorf("unsupported driver: %s", DBDriver)
 	}
-	return db
+	db, err := gorm.Open(dialector, &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+	return db, nil
 }

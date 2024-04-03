@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"database/sql"
+	"gorm.io/gorm"
 	"log"
 )
 
@@ -10,9 +10,9 @@ type RepoInterface interface {
 
 type RepoStruct struct {
 	log *log.Logger
-	db  *sql.DB
+	db  *gorm.DB
 }
 
-func CreateRepository(db *sql.DB, log *log.Logger) RepoInterface {
+func CreateRepository(db *gorm.DB, log *log.Logger) RepoInterface {
 	return RepoStruct{db: db, log: log}
 }

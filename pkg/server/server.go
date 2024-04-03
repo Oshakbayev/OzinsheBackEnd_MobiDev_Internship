@@ -24,7 +24,11 @@ func (s *Server) Run() error {
 }
 
 func InitServer(config *configs.Config, errLogger *log.Logger) *Server {
-	db := database.CreateDB(config.DBDriver)
+	db, err := database.CreateDB(config.DBDriver, config.DSN)
+	if err != nil {
+		errLogger.Println(err)
+		log.Fatal(err)
+	}
 	repo := repository.CreateRepository(db, errLogger)
 	service := services.CreateService(repo, errLogger)
 	handler := handlers.CreateHandler(service, errLogger)
