@@ -6,18 +6,18 @@ import (
 )
 
 type UserRepo interface {
-	GetUserByEmail(string) (entity.User, error)
+	GetUserByEmail(string) (*entity.User, error)
 	UpdateUserByID(*entity.User) error
 	UpdateUsersEmailStatus(int) error
 }
 
-func (r *RepoStruct) GetUserByEmail(email string) (entity.User, error) {
+func (r *RepoStruct) GetUserByEmail(email string) (*entity.User, error) {
 	var user entity.User
 	err := r.db.QueryRow(context.Background(), "SELECT * FROM users WHERE email = $1", email).Scan(&user.Id, &user.Email, &user.Password, &user.IsEmailVerified)
 	if err != nil {
 		r.log.Printf("error in GetUserByEmail(repository):%s", err.Error())
 	}
-	return user, err
+	return &user, err
 }
 
 func (r *RepoStruct) UpdateUserByID(user *entity.User) error {

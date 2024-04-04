@@ -2,14 +2,18 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"ozinshe/pkg/entity"
+	"regexp"
 	"time"
 )
 
 type AuthService interface {
 	SignUp(*entity.User) error
 	VerifyAccount(string) error
+	SigIn(*entity.Credentials) (*entity.User, error)
+	TokenGenerator(int, string) (string, error)
 }
 
 func (s *Service) SignUp(user *entity.User) error {
@@ -19,9 +23,13 @@ func (s *Service) SignUp(user *entity.User) error {
 		return err
 	}
 	user.Password = string(hashedPass)
+	regex := regexp.MustCompile(`.*[a-zA-Z0-9]+.*@.*\..*`)
+	if !regex.MatchString(user.Email) {
+		return errors.New("494")
+	}
 	ExistedUser, err := s.repo.GetUserByEmail(user.Email)
 	if err != nil {
-		if err.Error() != "no rows in result set" {
+		if err.Error() != entity.DidNotFind {
 			return err
 		}
 		if err = s.repo.CreateUser(user); err != nil {
@@ -29,12 +37,17 @@ func (s *Service) SignUp(user *entity.User) error {
 		}
 	} else if !ExistedUser.IsEmailVerified {
 		// if user registered but not verified and try to register again
+		err = s.repo.DeleteVerificationEmailByUserId(ExistedUser.Id)
+		if err != nil {
+			s.log.Printf("error during deleting verification email in VerifyAccount(Service):", err.Error())
+			return err
+		}
 		user.Id = ExistedUser.Id
 		if err = s.repo.UpdateUserByID(user); err != nil {
 			return err
 		}
 	} else {
-		return errors.New("user with this email already exist")
+		return errors.New(entity.AlreadyExist)
 	}
 	emailContent, secretCode, err := s.VerificationEmailGenerator(user.Email)
 	if err != nil {
@@ -43,7 +56,7 @@ func (s *Service) SignUp(user *entity.User) error {
 	}
 	if err = s.SendVerificationEmail(user.Email, emailContent); err != nil {
 		s.log.Printf("error during verification email sending in SignUp(Service):", err.Error())
-		return err
+		return errors.New("Invalid email")
 	}
 	if err = s.CreateVerificationEmail(user.Id, secretCode); err != nil {
 		s.log.Printf("error during verification email creating in SignUp(Service):", err.Error())
@@ -65,7 +78,7 @@ func (s *Service) VerifyAccount(secretCode string) error {
 			s.log.Printf("error during deleting verification email in VerifyAccount(Service):", err.Error())
 			return err
 		}
-		return errors.New("link expired")
+		return errors.New("497")
 	}
 	err = s.repo.UpdateUsersEmailStatus(verificationEmail.UserId)
 	if err != nil {
@@ -78,4 +91,20 @@ func (s *Service) VerifyAccount(secretCode string) error {
 		return err
 	}
 	return nil
+}
+
+func (s *Service) SigIn(credentials *entity.Credentials) (*entity.User, error) {
+	user, err := s.repo.GetUserByEmail(credentials.Email)
+	if err != nil {
+		// can be now rows in result set
+		return nil, err
+	} else if !user.IsEmailVerified {
+		//not verified email
+		return nil, errors.New("496")
+	}
+	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password)); err != nil {
+		s.log.Printf("given password  is incorrect: %s", credentials.Password)
+		return nil, fmt.Errorf("given password is incorrect: %s", credentials.Password)
+	}
+	return user, nil
 }

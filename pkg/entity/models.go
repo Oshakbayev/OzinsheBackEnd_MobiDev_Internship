@@ -1,16 +1,20 @@
 package entity
 
 import (
-	"errors"
+	"github.com/golang-jwt/jwt"
 	"time"
 )
 
 var (
 	EmtpyString         = ""
 	VerificationLinkURL = "http://localhost/auth/verifyAccount?link="
-	AlreadyExist        = errors.New("user with this email already exist")
-	DidNotFind          = errors.New("no rows in result set")
-	ExpiredLink         = errors.New("link expired")
+	AlreadyExist        = "499" //"user with this email already exist")
+	DidNotFind          = "no rows in result set"
+	ExpiredLink         = "497" //"link expired"
+	NotVerifiedEmail    = "496"
+	InvalidPassword     = "495"
+	InvalidEmail        = "494"
+	JWTKey              = []byte("sercet_key")
 )
 
 type User struct {
@@ -31,4 +35,16 @@ type VerificationEmail struct {
 
 type ErrorJSONResponse struct {
 	Message string
+}
+
+type Credentials struct {
+	Email    string `json:"Email"`
+	Password string `json:"Password"`
+}
+
+type Claims struct {
+	Email string `json:"email"`
+	Sub   int    `json:"sub"`
+	Level string `json:"level"`
+	jwt.StandardClaims
 }

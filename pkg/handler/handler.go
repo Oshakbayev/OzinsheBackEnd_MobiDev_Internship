@@ -25,7 +25,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		auth.POST("/sign-up", h.SignUp)
 		auth.GET("/verifyAccount", h.VerifyAccount)
-		//auth.POST("/sign-in", h.signIn)
+		auth.POST("/sign-in", h.SignIn)
 	}
 	ginServer.GET("/swagger", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return ginServer
