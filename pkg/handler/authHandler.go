@@ -67,7 +67,7 @@ func (h *Handler) SignIn(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	token, err := h.svc.TokenGenerator(user.Id, user.Email)
+	token, err := h.svc.TokenGenerator(user.Id, user.Email, "user")
 	if err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 	}

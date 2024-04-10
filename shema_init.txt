@@ -13,3 +13,117 @@ CREATE TABLE verification_emails (
     is_used BOOLEAN DEFAULT false,
     expired_at TIMESTAMPTZ NOT NULL DEFAULT NOW() + INTERVAL '48 hours'
 )
+
+CREATE TABLE IF NOT EXISTS movie_type (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(255),
+)
+
+CREATE TABLE IF NOT EXISTS movie (
+	id SERIAL PRIMARY KEY,
+    created_date TIMESTAMP,
+    description TEXT,
+    director VARCHAR(255),
+    keywords VARCHAR(255),
+    last_modified_date TIMESTAMP,
+    movie_type INT REFERENCES movie_type(id),
+    name VARCHAR(255),
+    producer VARCHAR(255),
+    season_count INT DEFAULT 1,
+    series_count INT DEFAULT 1,
+    timing INT,
+    trend BOOLEAN DEFAULT FALSE,
+    watch_count INT,
+    year INT
+)
+
+CREATE TABLE IF NOT EXISTS category (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(255),
+    movie_count INT DEFAULT 0
+
+)
+
+CREATE TABLE IF NOT EXISTS movie_category (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    category_id INT REFERENCES category(id) ON DELETE CASCADE
+)
+
+INSERT INTO category (name) VALUES
+    ('new'),
+    ('popular'),
+    ('trend'),
+    ('for you'),
+    ('abroad');
+
+CREATE TABLE IF NOT EXISTS genre (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(255),
+    movie_count INT DEFAULT 0
+
+)
+
+INSERT INTO genre (name) VALUES
+    ('action'),
+    ('drama'),
+    ('horror'),
+    ('thriller'),
+    ('comedy'),
+    ('for children'),
+    ('superhero'),
+    ('military'),
+    ('documental'),
+    ('sci-fi'),
+    ('fantastic');
+
+CREATE TABLE IF NOT EXISTS movie_genre (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    genre_id INT REFERENCES genre(id) ON DELETE CASCADE
+)
+
+
+CREATE TABLE IF NOT EXISTS category_ages (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(255),
+    movie_count INT DEFAULT 0
+
+)
+
+
+INSERT INTO category_age (name) VALUES
+    ('3+'),
+    ('8-12'),
+    ('12+'),
+    ('16+'),
+    ('18+');
+
+
+CREATE TABLE IF NOT EXISTS movie_categoryAges (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    category_id INT REFERENCES category(id) ON DELETE CASCADE
+)
+
+
+CREATE TABLE IF NOT EXISTS poster (
+	id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    link VARCHAR(255)
+)
+
+CREATE TABLE IF NOT EXISTS screenshot (
+	id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    link VARCHAR(255)
+)
+
+CREATE TABLE IF NOT EXISTS videos (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    link VARCHAR(255),
+    series_num INT,
+    season_num INT
+)
+

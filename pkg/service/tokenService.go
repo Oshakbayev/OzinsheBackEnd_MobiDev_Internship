@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-func (s *Service) TokenGenerator(userID int, email string) (string, error) {
+func (s *Service) TokenGenerator(userID int, email string, role string) (string, error) {
 	expTime := time.Now().Add(time.Hour * 48)
 	claims := &entity.Claims{
 		Email: email,
-		Level: "user",
+		Role:  role,
 		Sub:   userID,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expTime.Unix(),

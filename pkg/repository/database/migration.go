@@ -73,3 +73,65 @@ func ConnectToDB(DATABASE_URL string, errlog *log.Logger) (*pgxpool.Pool, error)
 	errlog.Println("Connected to the database!!")
 	return connPool, nil
 }
+
+func CreateAllTables(db *pgxpool.Pool) error {
+	_, err := db.Exec(context.Background(), `CREATE TABLE IF NOT EXISTS category (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movies(id),
+    link VARCHAR(255),
+    movie_count INT,
+    name VARCHAR(255)
+);`)
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(context.Background(), `CREATE TABLE IF NOT EXISTS images (
+    id SERIAL PRIMARY KEY,
+    file_id INT,
+    movie_id INT REFERENCES movies(id),
+    link VARCHAR(255)
+);`)
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(context.Background(), `CREATE TABLE IF NOT EXISTS videos (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movies(id),
+    link VARCHAR(255),
+    number INT,
+    season_id INT
+);`)
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(context.Background(), `CREATE TABLE IF NOT EXISTS movie (
+    id SERIAL PRIMARY KEY,
+    created_date TIMESTAMP,
+    description TEXT,
+    director VARCHAR(255),
+    favorite BOOLEAN DEFAULT FALSE,
+    keywords VARCHAR(255),
+    last_modified_date TIMESTAMP,
+    movie_type VARCHAR(255) DEFAULT 'movie',
+    name VARCHAR(255),
+    producer VARCHAR(255),
+    season_count INT DEFAULT 0,
+    series_count INT DEFAULT 1,
+    timing INT,
+    trend BOOLEAN DEFAULT FALSE,
+    watch_count INT,
+    year INT
+);`)
+	if err != nil {
+		return err
+	}
+	_, err = db.Exec(context.Background(), `CREATE TABLE IF NOT EXISTS genre (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255),
+    movie_count INT
+);`)
+	if err != nil {
+		return err
+	}
+	return nil
+}

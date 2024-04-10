@@ -13,7 +13,7 @@ type AuthService interface {
 	SignUp(*entity.User) error
 	VerifyAccount(string) error
 	SigIn(*entity.Credentials) (*entity.User, error)
-	TokenGenerator(int, string) (string, error)
+	TokenGenerator(int, string, string) (string, error)
 }
 
 func (s *Service) SignUp(user *entity.User) error {

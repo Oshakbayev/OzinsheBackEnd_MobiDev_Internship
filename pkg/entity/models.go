@@ -45,6 +45,59 @@ type Credentials struct {
 type Claims struct {
 	Email string `json:"email"`
 	Sub   int    `json:"sub"`
-	Level string `json:"level"`
+	Role  string `json:"role"`
 	jwt.StandardClaims
+}
+
+type Movie struct {
+	Id               int
+	CategoryIDs      []int
+	CategoryAgeIDs   []int
+	CreatedDate      time.Time
+	Description      string
+	Director         string
+	Favorite         bool
+	GenreIDs         []int
+	Keywords         string
+	LastModifiedDate time.Time
+	MovieType        string
+	Name             string
+	Poster           []Image
+	Producer         string
+	Screenshots      []Image
+	SeasonCount      int
+	SeriesCount      int
+	Timing           int
+	Trend            bool
+	Video            Video
+	WatchCount       int
+	Year             int
+}
+
+type Genre struct {
+	Id         int
+	Name       string
+	MovieCount int
+}
+
+type Category struct {
+	MovieId    int
+	Id         int
+	Link       string
+	MovieCount int
+	Name       string
+}
+
+type Image struct {
+	Id      int
+	FileId  int
+	MovieId int
+	Link    string
+}
+
+type Video struct {
+	Id           int
+	Link         string
+	SeriesNumber int
+	SeasonId     int
 }
