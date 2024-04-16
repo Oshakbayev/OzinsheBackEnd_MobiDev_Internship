@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS movie (
     trend BOOLEAN DEFAULT FALSE,
     watch_count INT,
     year INT
+    poster_link VARCHAR(255)
 )
 
 CREATE TABLE IF NOT EXISTS category (
@@ -127,3 +128,9 @@ CREATE TABLE IF NOT EXISTS videos (
     season_num INT
 )
 
+CREATE TABLE IF NOT EXISTS movie_main (
+    id SERIAL PRIMARY KEY,
+    movie_id INT REFERENCES movie(id) ON DELETE CASCADE,
+    movie_name VARCHAR(255),
+    poster_link VARCHAR(255) REFERENCES movie(poster_link) ON UPDATE CASCADE
+);

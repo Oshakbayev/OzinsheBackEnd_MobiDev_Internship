@@ -20,8 +20,19 @@ func CreateHandler(service service.SvcInterface, log *log.Logger) Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	ginServer := gin.Default()
-	ginServer.GET("/home", h.HomePageHandler)
-
+	core := ginServer.Group("/core", h.AuthMiddleware())
+	{
+		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
+		core.GET("/home", h.HomePageHandler)
+		core.GET("/movies/page", h.GetAllMovies)
+		core.GET("/movie/:id", h.GetMovieById)
+		core.GET("/movie/:id/season/:seasonId", h.GetMovieSeasonById)
+		core.GET("/movie/:id/season/:seasonId/series/:seriesId")
+		core.GET("/categories", h.GetCategories)
+		core.GET("/categories/:categoryId", h.GetMovieMainsByCategory)
+		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)
+		core.DELETE("/movie/:id", h.AdminRoleMiddleware(), h.DeleteMovieById)
+	}
 	auth := ginServer.Group("/auth")
 	{
 		auth.POST("/sign-up", h.SignUp)
@@ -29,7 +40,6 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-in", h.SignIn)
 	}
 	ginServer.GET("/swagger", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	ginServer.Use(h.AuthMiddleware())
 	return ginServer
 }
 

@@ -17,11 +17,19 @@ var (
 	JWTKey              = []byte("sercet_key")
 )
 
+const (
+	BucketName                   = "test-bucket-dostap"
+	VerificationSecretCodeLength = 16
+	Charset                      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	PicturesLinkNameLength       = 32
+)
+
 type User struct {
 	Id              int
 	Email           string `json:"Email"`
 	Password        string `json:"Password"`
 	IsEmailVerified bool
+	Role            string
 }
 
 type VerificationEmail struct {
@@ -49,55 +57,9 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-type Movie struct {
-	Id               int
-	CategoryIDs      []int
-	CategoryAgeIDs   []int
-	CreatedDate      time.Time
-	Description      string
-	Director         string
-	Favorite         bool
-	GenreIDs         []int
-	Keywords         string
-	LastModifiedDate time.Time
-	MovieType        string
-	Name             string
-	Poster           []Image
-	Producer         string
-	Screenshots      []Image
-	SeasonCount      int
-	SeriesCount      int
-	Timing           int
-	Trend            bool
-	Video            Video
-	WatchCount       int
-	Year             int
-}
-
-type Genre struct {
-	Id         int
-	Name       string
-	MovieCount int
-}
-
-type Category struct {
-	MovieId    int
-	Id         int
-	Link       string
-	MovieCount int
-	Name       string
-}
-
 type Image struct {
 	Id      int
 	FileId  int
 	MovieId int
 	Link    string
-}
-
-type Video struct {
-	Id           int
-	Link         string
-	SeriesNumber int
-	SeasonId     int
 }

@@ -7,6 +7,10 @@ import (
 
 type SvcInterface interface {
 	AuthService
+	MovieService
+	CategoryService
+	CategoryAgeService
+	GenreSerivce
 }
 
 type Service struct {

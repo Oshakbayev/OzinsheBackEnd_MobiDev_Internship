@@ -10,7 +10,7 @@ type AuthRepo interface {
 }
 
 func (r *RepoStruct) CreateUser(user *entity.User) error {
-	err := r.db.QueryRow(context.Background(), "INSERT INTO users (email,password_hash) VALUES ($1,$2) RETURNING id", user.Email, user.Password).Scan(&user.Id)
+	err := r.db.QueryRow(context.Background(), "INSERT INTO users (email,password_hash,role) VALUES ($1,$2,$3) RETURNING id", user.Email, user.Password, "user").Scan(&user.Id)
 	if err != nil {
 		r.log.Printf("error in CreateUser(repository):%s", err.Error())
 	}

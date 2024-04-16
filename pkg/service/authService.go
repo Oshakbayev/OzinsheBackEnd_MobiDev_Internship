@@ -100,7 +100,7 @@ func (s *Service) SigIn(credentials *entity.Credentials) (*entity.User, error) {
 		return nil, err
 	} else if !user.IsEmailVerified {
 		//not verified email
-		return nil, errors.New("496")
+		return nil, errors.New("email not verified")
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password)); err != nil {
 		s.log.Printf("given password  is incorrect: %s", credentials.Password)

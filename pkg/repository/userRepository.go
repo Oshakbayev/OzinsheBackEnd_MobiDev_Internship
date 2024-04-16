@@ -13,7 +13,7 @@ type UserRepo interface {
 
 func (r *RepoStruct) GetUserByEmail(email string) (*entity.User, error) {
 	var user entity.User
-	err := r.db.QueryRow(context.Background(), "SELECT * FROM users WHERE email = $1", email).Scan(&user.Id, &user.Email, &user.Password, &user.IsEmailVerified)
+	err := r.db.QueryRow(context.Background(), "SELECT * FROM users WHERE email = $1", email).Scan(&user.Id, &user.Email, &user.Password, &user.IsEmailVerified, &user.Role)
 	if err != nil {
 		r.log.Printf("error in GetUserByEmail(repository):%s", err.Error())
 	}

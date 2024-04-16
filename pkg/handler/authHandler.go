@@ -26,7 +26,7 @@ func (h *Handler) SignUp(c *gin.Context) {
 			return
 		}
 	}
-	h.WriteHTTPResponse(c, http.StatusOK, "user registered with id "+strconv.Itoa(user.Id))
+	h.WriteHTTPResponse(c, http.StatusOK, "user registered with id "+strconv.Itoa(user.Id)+",check your email to verify your account")
 
 }
 
@@ -67,7 +67,11 @@ func (h *Handler) SignIn(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	token, err := h.svc.TokenGenerator(user.Id, user.Email, "user")
+	role := "user"
+	if user.Role == "admin" {
+		role = "admin"
+	}
+	token, err := h.svc.TokenGenerator(user.Id, user.Email, role)
 	if err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 	}

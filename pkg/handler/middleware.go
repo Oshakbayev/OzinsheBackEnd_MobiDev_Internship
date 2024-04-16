@@ -38,16 +38,16 @@ func (h *Handler) AuthMiddleware() gin.HandlerFunc {
 		if err != nil {
 			if err.Error() == jwt.ErrSignatureInvalid.Error() {
 				h.log.Printf("Error in AuthMiddleware: %v", err)
-				h.WriteHTTPResponse(c, http.StatusUnauthorized, "494")
+				h.WriteHTTPResponse(c, http.StatusUnauthorized, err.Error())
 				return
 			}
 			h.log.Printf("Error in AuthMiddleware: %v", err)
-			h.WriteHTTPResponse(c, http.StatusUnauthorized, "493")
+			h.WriteHTTPResponse(c, http.StatusUnauthorized, err.Error())
 			return
 		}
 		if !tkn.Valid {
 			h.log.Printf("Error in AuthMiddleware: %v", err)
-			h.WriteHTTPResponse(c, http.StatusUnauthorized, "493")
+			h.WriteHTTPResponse(c, http.StatusUnauthorized, err.Error())
 			return
 		}
 		decodedClaims := tkn.Claims.(*entity.Claims)
@@ -55,4 +55,16 @@ func (h *Handler) AuthMiddleware() gin.HandlerFunc {
 		c.Next()
 	}
 
+}
+
+func (h *Handler) AdminRoleMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		claims := c.Value("decodedClaims").(*entity.Claims)
+		if claims.Role != "admin" {
+			h.log.Print("Error in AdminMiddleware: User is not admin!")
+			h.WriteHTTPResponse(c, http.StatusUnauthorized, "User is not admin!")
+			return
+		}
+		c.Next()
+	}
 }

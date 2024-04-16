@@ -9,6 +9,10 @@ type RepoInterface interface {
 	UserRepo
 	AuthRepo
 	VerificationEmailRepo
+	MovieRepo
+	CategoryRepo
+	CategoryAgeRepo
+	GenreRepo
 }
 
 type RepoStruct struct {
