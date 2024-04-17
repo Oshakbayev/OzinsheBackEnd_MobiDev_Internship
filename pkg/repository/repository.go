@@ -7,12 +7,12 @@ import (
 
 type RepoInterface interface {
 	UserRepo
-	AuthRepo
 	VerificationEmailRepo
 	MovieRepo
 	CategoryRepo
 	CategoryAgeRepo
 	GenreRepo
+	UserProfileRepo
 }
 
 type RepoStruct struct {

@@ -25,11 +25,17 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
 		core.GET("/home", h.HomePageHandler)
 		core.GET("/movies/page", h.GetAllMovies)
+		core.GET("/movie/genres", h.GetAllGenres)
 		core.GET("/movie/:id", h.GetMovieById)
 		core.GET("/movie/:id/season/:seasonId", h.GetMovieSeasonById)
 		core.GET("/movie/:id/season/:seasonId/series/:seriesId")
 		core.GET("/categories", h.GetCategories)
 		core.GET("/categories/:categoryId", h.GetMovieMainsByCategory)
+		core.GET("/user/profile", h.GetUserProfile)
+		core.GET("/movieMain/search", h.GetMovieMainsByTitle)
+
+		core.PUT("/user/profile", h.UpdateUserProfile)
+		core.PUT("/user/profile/password", h.ChangePassword)
 		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)
 		core.DELETE("/movie/:id", h.AdminRoleMiddleware(), h.DeleteMovieById)
 	}

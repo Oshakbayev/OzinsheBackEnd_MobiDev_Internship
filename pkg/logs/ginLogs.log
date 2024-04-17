@@ -74,3 +74,728 @@
 [GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
 [GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
 [GIN] 2024/04/16 - 20:47:40 | 200 |    344.4911ms |             ::1 | GET      "/core/movie/11/season/1"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:01:50 | 500 |    342.7543ms |             ::1 | GET      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:03:25 | 500 |    343.0576ms |             ::1 | GET      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:04:29 | 500 |    326.9362ms |             ::1 | GET      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:05:01 | 500 |    335.7108ms |             ::1 | GET      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:06:51 | 200 |    334.7283ms |             ::1 | GET      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:31:05 | 400 |            0s |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:32:51 | 400 |       175.2µs |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:33:54 | 400 |       997.9µs |             ::1 | PUT      "/core/user/profile"
+[GIN] 2024/04/17 - 18:34:09 | 400 |            0s |             ::1 | PUT      "/core/user/profile"
+[GIN] 2024/04/17 - 18:34:24 | 400 |            0s |             ::1 | PUT      "/core/user/profile"
+[GIN] 2024/04/17 - 18:34:54 | 400 |            0s |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:35:24 | 500 |    1.2386607s |             ::1 | PUT      "/core/user/profile"
+[GIN] 2024/04/17 - 18:37:29 | 500 |    670.1575ms |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:51:19 | 200 |    1.2465103s |             ::1 | PUT      "/core/user/profile"
+[GIN] 2024/04/17 - 18:51:57 | 500 |    553.2358ms |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:52:26 | 500 |    1.1054277s |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:52:59 | 500 |     1.238411s |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 18:54:00 | 200 |    1.2226301s |             ::1 | PUT      "/core/user/profile"
+[GIN] 2024/04/17 - 18:54:14 | 200 |     654.716ms |             ::1 | PUT      "/core/user/profile"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:30:27 | 404 |            0s |             ::1 | PUT      "/core/user/profile/pasword"
+[GIN] 2024/04/17 - 19:31:12 | 404 |    235.6886ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:40:57 | 500 |    222.5983ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:43:57 | 500 |     228.219ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:44:52 | 400 |    224.7949ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:47:24 | 400 |    219.7687ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:50:03 | 500 |    224.3634ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:51:09 | 200 |    704.3082ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN] 2024/04/17 - 19:53:52 | 400 |    284.2188ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN] 2024/04/17 - 19:54:01 | 500 |        4.15ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 19:56:08 | 400 |    401.3667ms |             ::1 | PUT      "/core/user/profile/password"
+[GIN] 2024/04/17 - 19:56:14 | 400 |            0s |             ::1 | PUT      "/core/user/profile/password"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 20:30:30 | 500 |     362.908ms |             ::1 | POST     "/core/movie"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 20:33:05 | 200 |    2.3864857s |             ::1 | POST     "/core/movie"
+[GIN] 2024/04/17 - 20:36:26 | 200 |    1.8002676s |             ::1 | POST     "/core/movie"
+[GIN] 2024/04/17 - 20:37:59 | 200 |    1.0165475s |             ::1 | POST     "/core/movie"
+[GIN] 2024/04/17 - 20:39:34 | 500 |    782.3453ms |             ::1 | POST     "/core/movie"
+[GIN] 2024/04/17 - 20:39:49 | 200 |    1.0387391s |             ::1 | POST     "/core/movie"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 20:48:43 | 401 |       502.8µs |             ::1 | GET      "/core/movieMain/search?title=Rakhat"
+[GIN] 2024/04/17 - 20:48:48 | 200 |    333.1611ms |             ::1 | GET      "/core/movieMain/search?title=Rakhat"
+[GIN] 2024/04/17 - 20:48:58 | 200 |    217.8849ms |             ::1 | GET      "/core/movieMain/search?title=rakhat"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 20:50:41 | 200 |    332.3168ms |             ::1 | GET      "/core/movieMain/search?title=rakhat"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 20:56:11 | 200 |    345.9365ms |             ::1 | GET      "/core/movieMain/search?title=rakhat"
+[GIN] 2024/04/17 - 22:30:01 | 401 |            0s |             ::1 | GET      "/core/movie/genres"
+[GIN] 2024/04/17 - 22:30:05 | 400 |            0s |             ::1 | GET      "/core/movie/genres"
+[GIN] 2024/04/17 - 22:31:33 | 400 |            0s |             ::1 | GET      "/core/movie/genres"
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /core/movie               --> ozinshe/pkg/handler.(*Handler).CreateMovie-fm (5 handlers)
+[GIN-debug] GET    /core/home                --> ozinshe/pkg/handler.(*Handler).HomePageHandler-fm (4 handlers)
+[GIN-debug] GET    /core/movies/page         --> ozinshe/pkg/handler.(*Handler).GetAllMovies-fm (4 handlers)
+[GIN-debug] GET    /core/movie/genres        --> ozinshe/pkg/handler.(*Handler).GetAllGenres-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).GetMovieById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId --> ozinshe/pkg/handler.(*Handler).GetMovieSeasonById-fm (4 handlers)
+[GIN-debug] GET    /core/movie/:id/season/:seasonId/series/:seriesId --> ozinshe/pkg/handler.(*Handler).AuthMiddleware.func1 (3 handlers)
+[GIN-debug] GET    /core/categories          --> ozinshe/pkg/handler.(*Handler).GetCategories-fm (4 handlers)
+[GIN-debug] GET    /core/categories/:categoryId --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByCategory-fm (4 handlers)
+[GIN-debug] GET    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).GetUserProfile-fm (4 handlers)
+[GIN-debug] GET    /core/movieMain/search    --> ozinshe/pkg/handler.(*Handler).GetMovieMainsByTitle-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile        --> ozinshe/pkg/handler.(*Handler).UpdateUserProfile-fm (4 handlers)
+[GIN-debug] PUT    /core/user/profile/password --> ozinshe/pkg/handler.(*Handler).ChangePassword-fm (4 handlers)
+[GIN-debug] PUT    /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).UpdateMovieById-fm (5 handlers)
+[GIN-debug] DELETE /core/movie/:id           --> ozinshe/pkg/handler.(*Handler).DeleteMovieById-fm (5 handlers)
+[GIN-debug] POST   /auth/sign-up             --> ozinshe/pkg/handler.(*Handler).SignUp-fm (3 handlers)
+[GIN-debug] GET    /auth/verifyAccount       --> ozinshe/pkg/handler.(*Handler).VerifyAccount-fm (3 handlers)
+[GIN-debug] POST   /auth/sign-in             --> ozinshe/pkg/handler.(*Handler).SignIn-fm (3 handlers)
+[GIN-debug] GET    /swagger                  --> github.com/swaggo/gin-swagger.CustomWrapHandler.func1 (3 handlers)
+[GIN] 2024/04/17 - 22:34:59 | 200 |    353.9811ms |             ::1 | GET      "/core/movie/genres"

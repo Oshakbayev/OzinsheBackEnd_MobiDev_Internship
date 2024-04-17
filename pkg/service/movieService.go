@@ -3,6 +3,7 @@ package service
 import (
 	"ozinshe/pkg/entity"
 	"ozinshe/pkg/helpers"
+	"strings"
 	"time"
 )
 
@@ -15,7 +16,8 @@ type MovieService interface {
 	DeleteMovieGenreByMovieId(movieId int) error
 	GetMovieSeason(movieId, seasonId int) ([]string, error)
 	GetMovieSeries(movieId, seriesId, seasonId int) (string, error)
-	GetMovieMainsByCategory(category, limit, offset int) ([]entity.MovieMain, error)
+	GetMovieMainsByCategory(category int, limit, offset int) ([]entity.MovieMain, error)
+	GetMovieMainsByTitle(string) ([]entity.MovieMain, error)
 }
 
 func (s *Service) CreateMovie(movie *entity.Movie) error {
@@ -28,6 +30,13 @@ func (s *Service) CreateMovie(movie *entity.Movie) error {
 	movie.LastModifiedDate = movie.CreatedDate
 	movieId, err := s.repo.CreateMovie(movie)
 	if err != nil {
+		return err
+	}
+	var movieMain entity.MovieMain
+	movieMain.MovieId = movieId
+	movieMain.MovieName = movie.Name
+	movieMain.PosterLink = posterLink
+	if err = s.repo.CreateMovieMain(&movieMain); err != nil {
 		return err
 	}
 	if err = s.repo.CreateMovieCategories(movieId, movie.CategoryIDs); err != nil {
@@ -82,7 +91,7 @@ func (s *Service) GetMovieSeries(movieId, seriesId, seasonId int) (string, error
 	return s.repo.GetMovieSeries(movieId, seriesId, seasonId)
 }
 
-func (s *Service) GetMovieMainsByCategory(category, limit, offset int) ([]entity.MovieMain, error) {
+func (s *Service) GetMovieMainsByCategory(category int, limit, offset int) ([]entity.MovieMain, error) {
 	movieIds, err := s.repo.GetMovieIdByCategory(category, limit, offset)
 	if err != nil {
 		s.log.Print("error during GetMovieMainsByCategory(service)\n")
@@ -94,4 +103,9 @@ func (s *Service) GetMovieMainsByCategory(category, limit, offset int) ([]entity
 		return nil, err
 	}
 	return movieMains, err
+}
+
+func (s *Service) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
+	title = strings.ToLower(title)
+	return s.repo.GetMovieMainsByTitle(title)
 }

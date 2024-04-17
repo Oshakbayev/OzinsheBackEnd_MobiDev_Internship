@@ -8,19 +8,21 @@ import (
 )
 
 type MovieRepo interface {
-	CreateMovie(movie *entity.Movie) (int, error)
-	CreateMoviePoster(movieID int, posterLink string) error
-	CreateMovieScreenshots(movieID int, screenshots []string) error
-	CreateMovieVideos(movieID int, videos []entity.Video) error
+	CreateMovie(*entity.Movie) (int, error)
+	CreateMoviePoster(int, string) error
+	CreateMovieScreenshots(int, []string) error
+	CreateMovieVideos(int, []entity.Video) error
+	CreateMovieMain(*entity.MovieMain) error
 	GetMoviesByPage(limit, offset int) ([]entity.Movie, error)
-	GetMovieById(id int) (*entity.Movie, error)
-	UpdateMovieById(movie *entity.Movie) error
-	DeleteMovieById(movieID int) error
-	DeleteMovieGenresByMovieID(movieID int) error
+	GetMovieById(int) (*entity.Movie, error)
+	UpdateMovieById(*entity.Movie) error
+	DeleteMovieById(int) error
+	DeleteMovieGenresByMovieID(int) error
 	GetMovieSeason(movieID, seasonId int) ([]string, error)
 	GetMovieSeries(movieID, seriesId, seasonId int) (string, error)
-	GetMovieIdByCategory(categoryId, limit, offset int) ([]int, error)
-	GetMovieMainByMovieIds(movieIds []int) ([]entity.MovieMain, error)
+	GetMovieIdByCategory(categoryId int, limit, offset int) ([]int, error)
+	GetMovieMainByMovieIds([]int) ([]entity.MovieMain, error)
+	GetMovieMainsByTitle(string) ([]entity.MovieMain, error)
 }
 
 func (r *RepoStruct) CreateMovie(movie *entity.Movie) (int, error) {
@@ -88,6 +90,15 @@ func (r *RepoStruct) CreateMovieVideos(movieID int, videos []entity.Video) error
 	}
 	return err
 
+}
+
+func (r *RepoStruct) CreateMovieMain(movieMain *entity.MovieMain) error {
+	query := `INSERT INTO movie_main (movie_id, movie_name, poster_link)  VALUES ($1, $2,$3) `
+	_, err := r.db.Exec(context.Background(), query, movieMain.MovieId, movieMain.MovieName, movieMain.PosterLink)
+	if err != nil {
+		r.log.Printf("error in CreateMovieMain(repository): %s", err.Error())
+	}
+	return err
 }
 
 func (r *RepoStruct) GetMoviesByPage(limit, offset int) ([]entity.Movie, error) {
@@ -405,7 +416,7 @@ func (r *RepoStruct) GetMovieSeries(movieID, seriesId, seasonId int) (string, er
 
 }
 
-func (r *RepoStruct) GetMovieIdByCategory(categoryId, limit, offset int) ([]int, error) {
+func (r *RepoStruct) GetMovieIdByCategory(categoryId int, limit, offset int) ([]int, error) {
 	query := `SELECT *
 FROM movie_category
 WHERE movie_id = ANY($1::int[])
@@ -441,6 +452,26 @@ func (r *RepoStruct) GetMovieMainByMovieIds(movieIds []int) ([]entity.MovieMain,
 		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink)
 		if err != nil {
 			r.log.Printf("error in GetMovieMainByMovieIds(repository):%s", err.Error())
+			return nil, err
+		}
+		movieMains = append(movieMains, movieMain)
+	}
+	return movieMains, err
+}
+
+func (r *RepoStruct) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
+	var movieMains []entity.MovieMain
+	query := `SELECT * FROM movie_main WHERE movie_name ILIKE  $1`
+	rows, err := r.db.Query(context.Background(), query, title)
+	if err != nil {
+		r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
+		return nil, err
+	}
+	for rows.Next() {
+		var movieMain entity.MovieMain
+		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink)
+		if err != nil {
+			r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
 			return nil, err
 		}
 		movieMains = append(movieMains, movieMain)

@@ -6,11 +6,12 @@ import (
 )
 
 type SvcInterface interface {
-	AuthService
+	UserService
 	MovieService
 	CategoryService
 	CategoryAgeService
 	GenreSerivce
+	UserProfileService
 }
 
 type Service struct {

@@ -40,3 +40,26 @@ func (r *RepoStruct) GetAllGenres() ([]entity.Category, error) {
 	}
 	return allGenres, err
 }
+
+func (r *RepoStruct) GetMovieIdByGenre(categoryId, limit, offset int) ([]int, error) {
+	query := `SELECT *
+FROM movie_genre
+WHERE movie_id = ANY($1::int[])
+LIMIT $2 OFFSET $3`
+	rows, err := r.db.Query(context.Background(), query, pq.Array(categoryId), limit, offset)
+	if err != nil {
+		r.log.Printf("error in GetMovieIdByGenre(repository):%s", err.Error())
+		return nil, err
+	}
+	var movieIds []int
+	for rows.Next() {
+		var id int
+		err = rows.Scan(&id)
+		if err != nil {
+			r.log.Printf("error in GetMovieIdByCategory(repository):%s", err.Error())
+			return nil, err
+		}
+		movieIds = append(movieIds, id)
+	}
+	return movieIds, err
+}

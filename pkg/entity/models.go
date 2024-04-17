@@ -15,6 +15,7 @@ var (
 	InvalidPassword     = "495"
 	InvalidEmail        = "494"
 	JWTKey              = []byte("sercet_key")
+	ErrNoRows           = "no rows in result set"
 )
 
 const (

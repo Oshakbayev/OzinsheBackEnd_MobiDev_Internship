@@ -9,11 +9,12 @@ import (
 	"time"
 )
 
-type AuthService interface {
+type UserService interface {
 	SignUp(*entity.User) error
 	VerifyAccount(string) error
 	SigIn(*entity.Credentials) (*entity.User, error)
 	TokenGenerator(int, string, string) (string, error)
+	ChangePasswordByUserId(userId int, oldPassword, newPassword string) error
 }
 
 func (s *Service) SignUp(user *entity.User) error {
@@ -104,7 +105,28 @@ func (s *Service) SigIn(credentials *entity.Credentials) (*entity.User, error) {
 	}
 	if err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password)); err != nil {
 		s.log.Printf("given password  is incorrect: %s", credentials.Password)
-		return nil, fmt.Errorf("given password is incorrect: %s", credentials.Password)
+		return nil, fmt.Errorf(entity.InvalidPassword)
 	}
 	return user, nil
+}
+
+//func (s *Service) GetPasswordByUserId(userId int) (string,error) {
+//	return s.repo.GetPasswordByUserId(userId)
+//}
+
+func (s *Service) ChangePasswordByUserId(userId int, oldPassword, newPassword string) error {
+	currentPassword, err := s.repo.GetPasswordByUserId(userId)
+	if err != nil {
+		return err
+	}
+
+	if err = bcrypt.CompareHashAndPassword([]byte(currentPassword), []byte(oldPassword)); err != nil {
+		return fmt.Errorf(entity.InvalidPassword)
+	}
+	newHashedPass, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	if err != nil {
+		s.log.Printf("error while creating hash of newPassword in ChangePasswordByUserId(Service): %s", err.Error())
+		return err
+	}
+	return s.repo.ChangePasswordByUserId(userId, string(newHashedPass))
 }

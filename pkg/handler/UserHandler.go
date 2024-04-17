@@ -1,7 +1,9 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"ozinshe/pkg/entity"
 	"strconv"
@@ -55,7 +57,7 @@ func (h *Handler) SignIn(c *gin.Context) {
 	user, err := h.svc.SigIn(&credentials)
 	if err != nil {
 		if err.Error() == entity.DidNotFind {
-			h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid email: "+credentials.Email)
+			h.WriteHTTPResponse(c, http.StatusNotFound, "Invalid email: "+credentials.Email)
 			return
 		} else if err.Error() == entity.NotVerifiedEmail {
 			h.WriteHTTPResponse(c, http.StatusBadRequest, "this email is not verified: "+credentials.Email)
@@ -78,6 +80,37 @@ func (h *Handler) SignIn(c *gin.Context) {
 	c.JSON(http.StatusOK, map[string]interface{}{
 		"token": token,
 	})
+}
+
+func (h *Handler) ChangePassword(c *gin.Context) {
+	var passwords map[string]interface{}
+	if err := c.BindJSON(&passwords); err != nil {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	oldPassword, ok := passwords["oldPassword"].(string)
+	if !ok {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	newPassword, ok := passwords["newPassword"].(string)
+	if !ok {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	userId := c.Value("decodedClaims").(*entity.Claims).Sub
+	fmt.Println(oldPassword, newPassword)
+	err := h.svc.ChangePasswordByUserId(userId, oldPassword, newPassword)
+	if err != nil {
+		if err.Error() == entity.InvalidPassword {
+			h.WriteHTTPResponse(c, http.StatusBadRequest, "invalid password")
+			return
+		}
+		log.Println(err)
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, "")
+		return
+	}
+	h.WriteHTTPResponse(c, http.StatusOK, "password changed")
 }
 
 func (h *Handler) HomePageHandler(c *gin.Context) {

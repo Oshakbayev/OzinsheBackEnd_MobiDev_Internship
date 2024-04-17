@@ -188,3 +188,15 @@ func (h *Handler) GetMovieMainsByCategory(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, movieMains)
 }
+
+func (h *Handler) GetMovieMainsByTitle(c *gin.Context) {
+	params := c.Request.URL.Query()
+	title := params.Get("title")
+	movieMains, err := h.svc.GetMovieMainsByTitle(title)
+	if err != nil {
+		h.log.Print("error in GetMovieMainsByTitle(handler)")
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, movieMains)
+}
