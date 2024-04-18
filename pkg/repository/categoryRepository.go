@@ -10,6 +10,8 @@ type CategoryRepo interface {
 	CreateMovieCategories(movieID int, categoryIDs []int) error
 	GetCategoryIdByName(categoryName string) (int, error)
 	GetAllCategories() ([]entity.Category, error)
+	GetAllMovieMainsByCategory(categoryId int) ([]entity.MovieMain, error)
+	GetMovieMainsByCategory(categoryId, limit, offset int) ([]entity.MovieMain, error)
 }
 
 func (r *RepoStruct) CreateMovieCategories(movieID int, categoryIDs []int) error {
@@ -50,4 +52,91 @@ func (r *RepoStruct) GetAllCategories() ([]entity.Category, error) {
 		allCategories = append(allCategories, category)
 	}
 	return allCategories, err
+}
+
+func (r *RepoStruct) GetAllMovieMainsByCategory(categoryId int) ([]entity.MovieMain, error) {
+	query := `SELECT *
+
+FROM (
+	SELECT 
+		mm.*,
+		mc.category_id
+ 	FROM 
+		movie_category as mc
+	LEFT JOIN 
+		movie_main as mm on mm.movie_id =mc.movie_id
+	WHERE 
+		mc.category_id = $1
+	) as t1 
+LEFT JOIN (
+	SELECT mg.movie_id,
+	ARRAY_AGG(g.name) AS genre_names
+	FROM
+		movie_genre as mg
+	LEFT JOIN 
+		genre AS g ON g.id = mg.genre_id
+	GROUP BY
+		 mg.movie_id
+) as t2 on t1.movie_id = t2.movie_id`
+	rows, err := r.db.Query(context.Background(), query, categoryId)
+	if err != nil {
+		r.log.Printf("error in GetMovieIdByGenre(repository):%s", err.Error())
+		return nil, err
+	}
+	var movieIds []entity.MovieMain
+	var movieMains []entity.MovieMain
+	for rows.Next() {
+		var movieMain entity.MovieMain
+		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieGenres)
+		if err != nil {
+			r.log.Printf("error in GetMovieMainByMovieIds(repository):%s", err.Error())
+			return nil, err
+		}
+		movieMains = append(movieMains, movieMain)
+	}
+	return movieIds, err
+}
+
+func (r *RepoStruct) GetMovieMainsByCategory(categoryId, limit, offset int) ([]entity.MovieMain, error) {
+	query := `SELECT *
+
+FROM (
+	SELECT 
+		mm.*,
+		mc.category_id
+ 	FROM 
+		movie_category as mc
+	LEFT JOIN 
+		movie_main as mm on mm.movie_id =mc.movie_id
+	WHERE 
+		mc.category_id = $1
+	) as t1 
+LEFT JOIN (
+	SELECT mg.movie_id,
+	ARRAY_AGG(g.name) AS genre_names
+	FROM
+		movie_genre as mg
+	LEFT JOIN 
+		genre AS g ON g.id = mg.genre_id
+	GROUP BY
+		 mg.movie_id
+) as t2 on t1.movie_id = t2.movie_id
+LIMIT $2 OFFSET $3`
+	rows, err := r.db.Query(context.Background(), query, categoryId, limit, offset)
+	if err != nil {
+		r.log.Printf("error in GetMovieIdByGenre(repository):%s", err.Error())
+		return nil, err
+	}
+	var movieIds []entity.MovieMain
+	var movieMains []entity.MovieMain
+	for rows.Next() {
+		var movieMain entity.MovieMain
+		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieGenres)
+		if err != nil {
+			r.log.Printf("error in GetMovieMainByMovieIds(repository):%s", err.Error())
+			return nil, err
+		}
+		movieMains = append(movieMains, movieMain)
+	}
+	return movieIds, err
 }

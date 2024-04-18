@@ -3,10 +3,11 @@ package entity
 import "time"
 
 type MovieMain struct {
-	Id         int
-	MovieId    int
-	MovieName  string
-	PosterLink string
+	Id          int
+	MovieId     int
+	MovieName   string
+	MovieGenres []string
+	PosterLink  string
 }
 
 type Movie struct {
@@ -36,4 +37,10 @@ type Movie struct {
 	Videos           []Video
 	WatchCount       int
 	Year             int `json:"year"`
+}
+
+type Favorite struct {
+	Id      int
+	UserId  int
+	MovieId int `json:"movieId"`
 }

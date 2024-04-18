@@ -62,7 +62,7 @@ func (h *Handler) AdminRoleMiddleware() gin.HandlerFunc {
 		claims := c.Value("decodedClaims").(*entity.Claims)
 		if claims.Role != "admin" {
 			h.log.Print("Error in AdminMiddleware: User is not admin!")
-			h.WriteHTTPResponse(c, http.StatusUnauthorized, "User is not admin!")
+			h.WriteHTTPResponse(c, http.StatusForbidden, "User is not admin!")
 			return
 		}
 		c.Next()

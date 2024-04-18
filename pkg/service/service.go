@@ -12,6 +12,7 @@ type SvcInterface interface {
 	CategoryAgeService
 	GenreSerivce
 	UserProfileService
+	FavoriteMovieService
 }
 
 type Service struct {

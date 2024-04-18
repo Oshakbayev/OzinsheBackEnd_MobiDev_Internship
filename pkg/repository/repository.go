@@ -13,6 +13,7 @@ type RepoInterface interface {
 	CategoryAgeRepo
 	GenreRepo
 	UserProfileRepo
+	FavoriteMovieRepo
 }
 
 type RepoStruct struct {

@@ -19,6 +19,9 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 	}
 	formData := c.Request.MultipartForm
 	//jsonString := formData.Value["json"][0]
+	//ScreenshotFileHeaders := formData.File["screenshots"]
+	//PosterFileHeaders := formData.File["poster"]
+
 	movie := entity.Movie{}
 	if err := json.NewDecoder(strings.NewReader(formData.Value["json"][0])).Decode(&movie); err != nil {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
@@ -28,7 +31,7 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	h.WriteHTTPResponse(c, http.StatusOK, "movie created!")
+	h.WriteHTTPResponse(c, http.StatusCreated, "movie created!")
 }
 
 func (h *Handler) GetAllMovies(c *gin.Context) {
@@ -158,35 +161,6 @@ func (h *Handler) GetMovieSeriesById(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, seasonSeriesLinks)
-}
-
-func (h *Handler) GetMovieMainsByCategory(c *gin.Context) {
-	categoryId, err := strconv.Atoi(c.Param("categoryId"))
-	if err != nil {
-		h.log.Print("categoryId is not a number")
-		h.WriteHTTPResponse(c, http.StatusBadRequest, "episodeId is not a number")
-		return
-	}
-	params := c.Request.URL.Query()
-	limit, err := strconv.Atoi(params.Get("limit"))
-	if err != nil {
-		h.log.Print("limit is not a number")
-		h.WriteHTTPResponse(c, http.StatusBadRequest, "limit is not a number")
-		return
-	}
-	offset, err := strconv.Atoi(params.Get("offset"))
-	if err != nil {
-		h.log.Print("offset is not a number")
-		h.WriteHTTPResponse(c, http.StatusBadRequest, "offset is not a number")
-		return
-	}
-	movieMains, err := h.svc.GetMovieMainsByCategory(categoryId, limit, offset)
-	if err != nil {
-		h.log.Print("error in GetMovieMainsByCategory(handler)")
-		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
-	c.JSON(http.StatusOK, movieMains)
 }
 
 func (h *Handler) GetMovieMainsByTitle(c *gin.Context) {

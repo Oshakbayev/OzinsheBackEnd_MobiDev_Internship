@@ -3,7 +3,6 @@ package service
 import (
 	"ozinshe/pkg/entity"
 	"ozinshe/pkg/helpers"
-	"strings"
 	"time"
 )
 
@@ -16,14 +15,10 @@ type MovieService interface {
 	DeleteMovieGenreByMovieId(movieId int) error
 	GetMovieSeason(movieId, seasonId int) ([]string, error)
 	GetMovieSeries(movieId, seriesId, seasonId int) (string, error)
-	GetMovieMainsByCategory(category int, limit, offset int) ([]entity.MovieMain, error)
 	GetMovieMainsByTitle(string) ([]entity.MovieMain, error)
 }
 
 func (s *Service) CreateMovie(movie *entity.Movie) error {
-	//if err:= s.repo.CreateMovie(movie); err != nil {
-	//
-	//}
 	posterLink := helpers.GenerateRandomKey(entity.PicturesLinkNameLength)
 	movie.PosterLink = posterLink
 	movie.CreatedDate = time.Now()
@@ -48,7 +43,7 @@ func (s *Service) CreateMovie(movie *entity.Movie) error {
 	if err = s.repo.CreateMovieGenres(movieId, movie.GenreIDs); err != nil {
 		return err
 	}
-	for i := 0; i < 3; i++ {
+	for i := 0; i < len(movie.Screenshots); i++ {
 		movie.ScreenshotLinks = append(movie.ScreenshotLinks, helpers.GenerateRandomKey(entity.PicturesLinkNameLength))
 		videoLink := helpers.GenerateRandomKey(entity.PicturesLinkNameLength)
 		video := entity.Video{Link: videoLink, SeasonId: 1, SeriesNumber: i}
@@ -91,21 +86,7 @@ func (s *Service) GetMovieSeries(movieId, seriesId, seasonId int) (string, error
 	return s.repo.GetMovieSeries(movieId, seriesId, seasonId)
 }
 
-func (s *Service) GetMovieMainsByCategory(category int, limit, offset int) ([]entity.MovieMain, error) {
-	movieIds, err := s.repo.GetMovieIdByCategory(category, limit, offset)
-	if err != nil {
-		s.log.Print("error during GetMovieMainsByCategory(service)\n")
-		return nil, err
-	}
-	movieMains, err := s.repo.GetMovieMainByMovieIds(movieIds)
-	if err != nil {
-		s.log.Print("error during GetMovieMainsByCategory(service)\n")
-		return nil, err
-	}
-	return movieMains, err
-}
-
 func (s *Service) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
-	title = strings.ToLower(title)
+	//title = strings.ToLower(title)
 	return s.repo.GetMovieMainsByTitle(title)
 }

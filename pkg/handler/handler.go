@@ -23,6 +23,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	core := ginServer.Group("/core", h.AuthMiddleware())
 	{
 		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
+		core.POST("favorites", h.CreateFavoriteMovie)
 		core.GET("/home", h.HomePageHandler)
 		core.GET("/movies/page", h.GetAllMovies)
 		core.GET("/movie/genres", h.GetAllGenres)
@@ -33,11 +34,13 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		core.GET("/categories/:categoryId", h.GetMovieMainsByCategory)
 		core.GET("/user/profile", h.GetUserProfile)
 		core.GET("/movieMain/search", h.GetMovieMainsByTitle)
-
+		core.GET("/movieMain/search/genre", h.GetMovieMainsByGenre)
+		core.GET("/favorites/", h.GetFavoriteMovies)
 		core.PUT("/user/profile", h.UpdateUserProfile)
 		core.PUT("/user/profile/password", h.ChangePassword)
 		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)
 		core.DELETE("/movie/:id", h.AdminRoleMiddleware(), h.DeleteMovieById)
+		core.DELETE("/favorite/", h.DeleteFavoriteMovies)
 	}
 	auth := ginServer.Group("/auth")
 	{
