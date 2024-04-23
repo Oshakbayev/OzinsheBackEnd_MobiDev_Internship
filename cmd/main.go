@@ -11,6 +11,7 @@ import (
 	"os"
 	"os/signal"
 	"ozinshe/cmd/configs"
+	"ozinshe/pkg/bucket"
 	handlers "ozinshe/pkg/handler"
 	"ozinshe/pkg/logs"
 	"ozinshe/pkg/repository"
@@ -41,8 +42,10 @@ func main() {
 		log.Fatal(err)
 	}
 	defer db.Close()
+	client := bucket.ConnectToBucket()
 	repo := repository.CreateRepository(db, logger)
-	service := services.CreateService(repo, logger)
+	bc := bucket.CreateBucket(logger, client)
+	service := services.CreateService(repo, logger, bc)
 	handler := handlers.CreateHandler(service, logger)
 	srv := &server.Server{}
 	go func() {

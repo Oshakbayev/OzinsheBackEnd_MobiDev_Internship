@@ -43,7 +43,7 @@ func (r *RepoStruct) GetUserFavoriteMovieIDs(userId int) ([]int, error) {
 
 func (r *RepoStruct) DeleteFavoriteMovie(favorite entity.Favorite) error {
 	query := `DELETE FROM favorites WHERE user_id = $1 AND movie_id = $2`
-	_, err := r.db.Exec(context.Background(), query, favorite.UserId, favorite.UserId)
+	_, err := r.db.Exec(context.Background(), query, favorite.UserId, favorite.MovieId)
 	if err != nil {
 		r.log.Printf("error in DeleteFavoriteMovie(repository):%s", err.Error())
 	}

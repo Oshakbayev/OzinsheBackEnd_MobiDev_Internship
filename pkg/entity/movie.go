@@ -35,6 +35,7 @@ type Movie struct {
 	Timing           int  `json:"timing"`
 	Trend            bool `json:"trend"`
 	Videos           []Video
+	VideoLinks       []string
 	WatchCount       int
 	Year             int `json:"year"`
 }

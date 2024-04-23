@@ -18,6 +18,7 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		return
 	}
 	formData := c.Request.MultipartForm
+
 	//jsonString := formData.Value["json"][0]
 	//ScreenshotFileHeaders := formData.File["screenshots"]
 	//PosterFileHeaders := formData.File["poster"]
@@ -27,7 +28,7 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
 		return
 	}
-	if err := h.svc.CreateMovie(&movie); err != nil {
+	if err := h.svc.CreateMovie(&movie, formData); err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}

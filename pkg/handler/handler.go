@@ -40,7 +40,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		core.PUT("/user/profile/password", h.ChangePassword)
 		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)
 		core.DELETE("/movie/:id", h.AdminRoleMiddleware(), h.DeleteMovieById)
-		core.DELETE("/favorite/", h.DeleteFavoriteMovies)
+		core.DELETE("/favorites/", h.DeleteFavoriteMovies)
 	}
 	auth := ginServer.Group("/auth")
 	{
