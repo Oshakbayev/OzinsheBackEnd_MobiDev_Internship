@@ -12,7 +12,6 @@ func ConnectToBucket() *s3.Client {
 	if err != nil {
 		log.Fatalf("unable to load SDK config, %v", err)
 	}
-
 	client := s3.NewFromConfig(cfg)
 
 	return client

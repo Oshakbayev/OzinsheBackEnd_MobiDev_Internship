@@ -14,6 +14,7 @@ type RepoInterface interface {
 	GenreRepo
 	UserProfileRepo
 	FavoriteMovieRepo
+	VideoRepo
 }
 
 type RepoStruct struct {

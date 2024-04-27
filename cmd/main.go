@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 	_ "github.com/swaggo/files"       // swagger embed files
 	_ "github.com/swaggo/gin-swagger" // gin-swagger middleware
@@ -25,6 +26,11 @@ import (
 // @version         1.0
 // @description     This is a sample server celler server.
 func main() {
+	if _, err := os.ReadFile(".env"); err == nil {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
 	config := configs.CreateConfig()
 	if err := configs.ReadConfig("cmd/configs/config.json", &config); err != nil {
 		log.Fatal(err)

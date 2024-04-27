@@ -1,9 +1,9 @@
 package service
 
 import (
+	"errors"
 	"mime/multipart"
 	"ozinshe/pkg/entity"
-	"ozinshe/pkg/helpers"
 	"time"
 )
 
@@ -20,12 +20,6 @@ type MovieService interface {
 }
 
 func (s *Service) CreateMovie(movie *entity.Movie, formData *multipart.Form) error {
-	screenshotsDirectoryName := movie.Name + "/Screenshots"
-	videoDirectoryName := movie.Name + "/Video"
-	PostersDirectoryName := movie.Name + "/Poster"
-	ScreenshotHeaders := formData.File["screenshots"]
-	VideoHeaders := formData.File["video"]
-	PosterHeaders := formData.File["poster"]
 	movie.CreatedDate = time.Now()
 	movie.LastModifiedDate = movie.CreatedDate
 	movieId, err := s.repo.CreateMovie(movie)
@@ -35,31 +29,52 @@ func (s *Service) CreateMovie(movie *entity.Movie, formData *multipart.Form) err
 	var movieMain entity.MovieMain
 	movieMain.MovieId = movieId
 	movieMain.MovieName = movie.Name
+	movieMain.PosterLink = movie.PosterLink
 	if err = s.repo.CreateMovieMain(&movieMain); err != nil {
 		return err
 	}
 	if err = s.repo.CreateMovieCategories(movieId, movie.CategoryIDs); err != nil {
+		if err2 := s.DeleteMovieById(movieId); err2 != nil {
+			return errors.New("error in movie delete: " + err2.Error())
+		}
 		return err
 	}
 	if err = s.repo.CreateMovieCategoryAges(movieId, movie.CategoryAgeIDs); err != nil {
+		if err2 := s.DeleteMovieById(movieId); err2 != nil {
+			return errors.New("error in movie delete: " + err2.Error())
+		}
 		return err
 	}
 	if err = s.repo.CreateMovieGenres(movieId, movie.GenreIDs); err != nil {
 		return err
 	}
-	if movie.ScreenshotLinks, err = s.UploadFile(ScreenshotHeaders, screenshotsDirectoryName); err != nil {
+	//if movie.ScreenshotLinks, err = s.UploadFile(ScreenshotHeaders); err != nil {
+	//	return err
+	//}
+	//if err := s.AddSeason(movieId, VideoHeaders); err != nil {
+	//	if err2 := s.DeleteMovieById(movieId); err2 != nil {
+	//		return errors.New("error in movie delete: " + err2.Error())
+	//	}
+	//	return err
+	//}
+	for i, link := range movie.VideoLinks {
+		var video entity.Video
+		video.Link = link
+		video.SeriesNumber = i + 1
+		video.SeasonId = 1
+		movie.Videos = append(movie.Videos, video)
+	}
+	if err := s.repo.CreateMovieVideos(movieId, movie.Videos); err != nil {
+		if err2 := s.DeleteMovieById(movieId); err2 != nil {
+			return errors.New("error in delete: " + err2.Error())
+		}
 		return err
 	}
-	if movie.VideoLinks, err = s.UploadFile(VideoHeaders, videoDirectoryName); err != nil {
-		return err
-	}
-	posters, err := s.UploadFile(PosterHeaders, PostersDirectoryName)
-	movie.PosterLink = posters[0]
-	movieMain.PosterLink = posters[0]
+
 	if err = s.repo.CreateMovieScreenshots(movieId, movie.ScreenshotLinks); err != nil {
-		return err
-	}
-	if err = s.repo.CreateMovieVideos(movieId, movie.Videos); err != nil {
+		if err2 := s.DeleteMovieById(movieId); err2 != nil {
+			return errors.New("error in movie delete: " + err2.Error())
+		}
 		return err
 	}
 	return nil
@@ -96,31 +111,4 @@ func (s *Service) GetMovieSeries(movieId, seriesId, seasonId int) (string, error
 func (s *Service) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
 	//title = strings.ToLower(title)
 	return s.repo.GetMovieMainsByTitle(title)
-}
-
-func (s *Service) UploadFile(fileHeaders []*multipart.FileHeader, directoryName string) ([]string, error) {
-	var fileNames []string
-	for _, fileHeader := range fileHeaders {
-		file, err := fileHeader.Open()
-		if err != nil {
-			s.log.Printf("\nError UploadFile(service) in opening files : %s\n", err.Error())
-			return nil, err
-		}
-		fileName := helpers.GenerateRandomKey(entity.PicturesLinkNameLength)
-		fileNames = append(fileNames, fileName)
-		if err := s.bc.UploadFile(entity.BucketName, directoryName+"/"+fileName, file); err != nil {
-			s.log.Printf("error during upload file in UploadFile(Service) %s", err.Error())
-			return nil, err
-		}
-		err = file.Close()
-		if err != nil {
-			s.log.Printf("\nError UploadFile(service) in closing files : %s\n", err.Error())
-			return nil, err
-		}
-		//movie.ScreenshotLinks = append(movie.ScreenshotLinks, helpers.GenerateRandomKey(entity.PicturesLinkNameLength))
-		//videoLink := helpers.GenerateRandomKey(entity.PicturesLinkNameLength)
-		//video := entity.Video{Link: videoLink, SeasonId: 1, SeriesNumber: i}
-		//movie.Videos = append(movie.Videos, video)
-	}
-	return fileNames, nil
 }

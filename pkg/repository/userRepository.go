@@ -15,7 +15,7 @@ type UserRepo interface {
 }
 
 func (r *RepoStruct) CreateUser(user *entity.User) error {
-	err := r.db.QueryRow(context.Background(), "INSERT INTO users (email,password_hash,role) VALUES ($1,$2,$3) RETURNING id", user.Email, user.Password, "user").Scan(&user.Id)
+	err := r.db.QueryRow(context.Background(), "INSERT INTO users (email,password_hash,role,username,birth_date,phone_num) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id", user.Email, user.Password, "user", user.Username, user.BirthDate, user.PhoneNumber).Scan(&user.Id)
 	if err != nil {
 		r.log.Printf("error in CreateUser(repository):%s", err.Error())
 	}
@@ -24,7 +24,7 @@ func (r *RepoStruct) CreateUser(user *entity.User) error {
 
 func (r *RepoStruct) GetUserByEmail(email string) (*entity.User, error) {
 	var user entity.User
-	err := r.db.QueryRow(context.Background(), "SELECT * FROM users WHERE email = $1", email).Scan(&user.Id, &user.Email, &user.Password, &user.IsEmailVerified, &user.Role)
+	err := r.db.QueryRow(context.Background(), "SELECT * FROM users WHERE email = $1", email).Scan(&user.Id, &user.Email, &user.Password, &user.IsEmailVerified, &user.Role, &user.Username, &user.BirthDate, &user.PhoneNumber)
 	if err != nil {
 		r.log.Printf("error in GetUserByEmail(repository):%s", err.Error())
 	}

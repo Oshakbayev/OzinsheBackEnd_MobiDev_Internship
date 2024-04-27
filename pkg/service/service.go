@@ -14,6 +14,7 @@ type SvcInterface interface {
 	GenreSerivce
 	UserProfileService
 	FavoriteMovieService
+	VideoService
 }
 
 type Service struct {

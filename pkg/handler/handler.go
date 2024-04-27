@@ -20,6 +20,8 @@ func CreateHandler(service service.SvcInterface, log *log.Logger) Handler {
 
 func (h *Handler) InitRoutes() *gin.Engine {
 	ginServer := gin.Default()
+	ginServer.MaxMultipartMemory = 8 << 20
+	ginServer.Static("/assets", "./assets")
 	core := ginServer.Group("/core", h.AuthMiddleware())
 	{
 		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
@@ -35,7 +37,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		core.GET("/user/profile", h.GetUserProfile)
 		core.GET("/movieMain/search", h.GetMovieMainsByTitle)
 		core.GET("/movieMain/search/genre", h.GetMovieMainsByGenre)
-		core.GET("/favorites/", h.GetFavoriteMovies)
+		//core.GET("/favorites/", h.GetFavoriteMovies)
 		core.PUT("/user/profile", h.UpdateUserProfile)
 		core.PUT("/user/profile/password", h.ChangePassword)
 		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)

@@ -7,6 +7,7 @@ type MovieMain struct {
 	MovieId     int
 	MovieName   string
 	MovieGenres []string
+	MovieYear   string
 	PosterLink  string
 }
 

@@ -3,6 +3,7 @@ package handler
 import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"log"
 	"net/http"
 	"ozinshe/pkg/entity"
 	"strconv"
@@ -10,23 +11,42 @@ import (
 )
 
 func (h *Handler) CreateMovie(c *gin.Context) {
-	err := c.Request.ParseMultipartForm(10 << 20) // Parse up to 10 MB of data
-	if err != nil {
-		h.log.Printf("error during ParseMultipartForm in CreateMovie(handler): %v", err)
-		//http.Error(w, "Error parsing multipart form", http.StatusBadRequest)
-		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
-		return
-	}
 	formData := c.Request.MultipartForm
-
-	//jsonString := formData.Value["json"][0]
-	//ScreenshotFileHeaders := formData.File["screenshots"]
-	//PosterFileHeaders := formData.File["poster"]
 
 	movie := entity.Movie{}
 	if err := json.NewDecoder(strings.NewReader(formData.Value["json"][0])).Decode(&movie); err != nil {
+		log.Println(err)
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
 		return
+	}
+	ScreenshotFileHeaders := formData.File["screenshots[]"]
+	PosterFile, _ := c.FormFile("poster")
+	VideoFileHeaders := formData.File["video[]"]
+	movie.PosterLink = "/assets/uploads/" + movie.Name + "/poster/" + PosterFile.Filename
+	if err := c.SaveUploadedFile(PosterFile, movie.PosterLink); err != nil {
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	for _, file := range ScreenshotFileHeaders {
+		log.Println(file.Filename)
+		dst := "/assets/uploads/" + movie.Name + "/screenshots/" + file.Filename
+		movie.ScreenshotLinks = append(movie.ScreenshotLinks, dst)
+		// Upload the file to specific dst
+		if err := c.SaveUploadedFile(file, dst); err != nil {
+			h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
+	}
+	for _, file := range VideoFileHeaders {
+
+		log.Println(file.Filename)
+		dst := "/assets/uploads/" + movie.Name + "/videos/" + file.Filename
+		movie.VideoLinks = append(movie.VideoLinks, dst)
+		// Upload the file to specific dst
+		if err := c.SaveUploadedFile(file, dst); err != nil {
+			h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+			return
+		}
 	}
 	if err := h.svc.CreateMovie(&movie, formData); err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())

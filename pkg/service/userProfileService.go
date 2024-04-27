@@ -3,12 +3,12 @@ package service
 import "ozinshe/pkg/entity"
 
 type UserProfileService interface {
-	GetUserProfileByUserId(int) (entity.UserProfile, error)
+	GetUserProfileByUserId(int) (entity.User, error)
 	CreateUserProfile(*entity.UserProfile) error
 	UpdateUserProfile(*entity.UserProfile) error
 }
 
-func (s *Service) GetUserProfileByUserId(userId int) (entity.UserProfile, error) {
+func (s *Service) GetUserProfileByUserId(userId int) (entity.User, error) {
 	return s.repo.GetUserProfileByUserId(userId)
 }
 

@@ -11,10 +11,12 @@ import (
 
 type UserService interface {
 	SignUp(*entity.User) error
+	PasswordValidator(string) error
 	VerifyAccount(string) error
 	SigIn(*entity.Credentials) (*entity.User, error)
 	TokenGenerator(int, string, string) (string, error)
-	ChangePasswordByUserId(userId int, oldPassword, newPassword string) error
+	ChangePasswordByUserId(int, string, string) error
+	ConfirmPasswordValidator(string, string) error
 }
 
 func (s *Service) SignUp(user *entity.User) error {
@@ -24,9 +26,9 @@ func (s *Service) SignUp(user *entity.User) error {
 		return err
 	}
 	user.Password = string(hashedPass)
-	regex := regexp.MustCompile(`.*[a-zA-Z0-9]+.*@.*\..*`)
+	regex := regexp.MustCompile(`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`)
 	if !regex.MatchString(user.Email) {
-		return errors.New("494")
+		return errors.New(entity.InvalidEmail)
 	}
 	ExistedUser, err := s.repo.GetUserByEmail(user.Email)
 	if err != nil {
@@ -57,7 +59,7 @@ func (s *Service) SignUp(user *entity.User) error {
 	}
 	if err = s.SendVerificationEmail(user.Email, emailContent); err != nil {
 		s.log.Printf("error during verification email sending in SignUp(Service):", err.Error())
-		return errors.New("Invalid email")
+		return errors.New("invalid email")
 	}
 	if err = s.CreateVerificationEmail(user.Id, secretCode); err != nil {
 		s.log.Printf("error during verification email creating in SignUp(Service):", err.Error())
@@ -66,6 +68,20 @@ func (s *Service) SignUp(user *entity.User) error {
 	return nil
 }
 
+func (s *Service) PasswordValidator(password string) error {
+	regex := regexp.MustCompile(`[A-Za-z0-9]*[@$!&]*.{7,}$`)
+	if !regex.MatchString(password) {
+		return errors.New("A password should be alphanumeric.\nFirst letter of the password should be capital.\nPassword must contain a special character (@, $, !, &, etc).\nPassword length must be greater than 8 characters.")
+	}
+	return nil
+}
+
+func (s *Service) ConfirmPasswordValidator(password, confirmPassword string) error {
+	if confirmPassword != password {
+		return errors.New(entity.InvalidConfirmPassword)
+	}
+	return nil
+}
 func (s *Service) VerifyAccount(secretCode string) error {
 	verificationEmail, err := s.repo.GetVerificationEmailStatusBySecretCode(secretCode)
 	if err != nil {

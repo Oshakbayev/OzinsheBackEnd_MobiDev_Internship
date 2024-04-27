@@ -7,7 +7,7 @@ import (
 
 type FavoriteMovieRepo interface {
 	CreatFavoriteMovie(entity.Favorite) error
-	GetUserFavoriteMovieIDs(int) ([]int, error)
+	GetUserFavoriteMovieMains(int) ([]entity.MovieMain, error)
 	DeleteFavoriteMovie(entity.Favorite) error
 	GetFavoriteMovie(entity.Favorite) (entity.Favorite, error)
 }
@@ -21,24 +21,9 @@ func (r *RepoStruct) CreatFavoriteMovie(favorite entity.Favorite) error {
 	return err
 }
 
-func (r *RepoStruct) GetUserFavoriteMovieIDs(userId int) ([]int, error) {
-	query := `SELECT movie_id FROM favorites WHERE user_id = $1`
-	rows, err := r.db.Query(context.Background(), query, userId)
-	if err != nil {
-		r.log.Printf("error in GetUserFavoriteMovieIDs(repository):%s", err.Error())
-		return nil, err
-	}
-	var movieIds []int
-	for rows.Next() {
-		var id int
-		err = rows.Scan(&id)
-		if err != nil {
-			r.log.Printf("error in GetUserFavoriteMovieIDs(repository):%s", err.Error())
-			return nil, err
-		}
-		movieIds = append(movieIds, id)
-	}
-	return movieIds, err
+func (r *RepoStruct) GetUserFavoriteMovieMains(userId int) ([]entity.MovieMain, error) {
+	query := `SELECT * FROM movie WHERE user_id = $1`
+	return r.GetMovieMainsByQuery(query, userId)
 }
 
 func (r *RepoStruct) DeleteFavoriteMovie(favorite entity.Favorite) error {

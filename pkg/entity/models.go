@@ -6,32 +6,25 @@ import (
 )
 
 var (
-	EmtpyString         = ""
-	VerificationLinkURL = "http://localhost/auth/verifyAccount?link="
-	AlreadyExist        = "499" //"user with this email already exist")
-	DidNotFind          = "no rows in result set"
-	ExpiredLink         = "497" //"link expired"
-	NotVerifiedEmail    = "496"
-	InvalidPassword     = "495"
-	InvalidEmail        = "494"
-	JWTKey              = []byte("sercet_key")
-	ErrNoRows           = "no rows in result set"
+	EmtpyString            = ""
+	VerificationLinkURL    = "http://localhost/auth/verifyAccount?link="
+	AlreadyExist           = "user with this email already exist"
+	DidNotFind             = "no rows in result set"
+	ExpiredLink            = "this Link Expired"
+	NotVerifiedEmail       = "this account's email not verified"
+	InvalidPassword        = "invalid password"
+	InvalidEmail           = "invalid email"
+	InvalidConfirmPassword = "passwords must be same"
+	JWTKey                 = []byte("sercet_key")
+	ErrNoRows              = "no rows in result set"
 )
 
 const (
-	BucketName                   = "test-bucket-dostap"
+	BucketName                   = "ozinshebucket"
 	VerificationSecretCodeLength = 16
 	Charset                      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	PicturesLinkNameLength       = 32
 )
-
-type User struct {
-	Id              int
-	Email           string `json:"Email"`
-	Password        string `json:"Password"`
-	IsEmailVerified bool
-	Role            string
-}
 
 type VerificationEmail struct {
 	Id           int

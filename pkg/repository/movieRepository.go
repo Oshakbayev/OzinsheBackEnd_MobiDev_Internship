@@ -415,13 +415,14 @@ func (r *RepoStruct) GetMovieSeries(movieID, seriesId, seasonId int) (string, er
 }
 
 func (r *RepoStruct) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
-	var movieMains []entity.MovieMain
+
 	title = "%" + title + "%"
 	query := `SELECT 
 	t1.id,
 	t1.movie_id,
 	t1.movie_name,
 	t1.poster_link,
+	t1.MovieYear,
 	t1.genre_names
 FROM(	
 SELECT 
@@ -437,14 +438,19 @@ SELECT
 		mm.id
 ) AS t1
 WHERE  t1.movie_name ILIKE  $1`
-	rows, err := r.db.Query(context.Background(), query, title)
+	return r.GetMovieMainsByQuery(query, title)
+}
+
+func (r *RepoStruct) GetMovieMainsByQuery(query string, params ...any) ([]entity.MovieMain, error) {
+	var movieMains []entity.MovieMain
+	rows, err := r.db.Query(context.Background(), query, params...)
 	if err != nil {
 		r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
 		return nil, err
 	}
 	for rows.Next() {
 		var movieMain entity.MovieMain
-		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieGenres)
+		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieYear, &movieMain.MovieGenres)
 		if err != nil {
 			r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
 			return nil, err

@@ -7,7 +7,7 @@ import (
 )
 
 func (s *Service) TokenGenerator(userID int, email string, role string) (string, error) {
-	expTime := time.Now().Add(time.Hour * 48)
+	expTime := time.Now().Add(time.Hour * 720)
 	claims := &entity.Claims{
 		Email: email,
 		Role:  role,

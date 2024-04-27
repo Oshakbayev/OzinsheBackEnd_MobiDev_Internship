@@ -6,19 +6,19 @@ import (
 )
 
 type UserProfileRepo interface {
-	GetUserProfileByUserId(int) (entity.UserProfile, error)
+	GetUserProfileByUserId(int) (entity.User, error)
 	CreateUserProfile(*entity.UserProfile) error
 	UpdateUserProfile(*entity.UserProfile) error
 }
 
-func (r *RepoStruct) GetUserProfileByUserId(userId int) (entity.UserProfile, error) {
-	query := `SELECT * FROM user_profile WHERE user_id = $1`
-	var userProfile entity.UserProfile
-	err := r.db.QueryRow(context.Background(), query, userId).Scan(&userProfile.Id, &userProfile.BirthDate, &userProfile.UserId, &userProfile.Language, &userProfile.PhoneNumber)
+func (r *RepoStruct) GetUserProfileByUserId(userId int) (entity.User, error) {
+	query := `SELECT email,username,birth_date,phone_num FROM user WHERE user_id = $1`
+	var user entity.User
+	err := r.db.QueryRow(context.Background(), query, userId).Scan(&user.Email, &user.Username, &user.BirthDate, &user.PhoneNumber)
 	if err != nil {
 		r.log.Printf("error in GetUserProfileByUserId(repository):%s", err.Error())
 	}
-	return userProfile, err
+	return user, err
 }
 
 func (r *RepoStruct) CreateUserProfile(userProfile *entity.UserProfile) error {

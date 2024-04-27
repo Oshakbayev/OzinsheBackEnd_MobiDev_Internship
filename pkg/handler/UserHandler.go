@@ -15,7 +15,17 @@ func (h *Handler) SignUp(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
 		return
 	}
-	err := h.svc.SignUp(&user)
+	err := h.svc.PasswordValidator(user.Password)
+	if err != nil {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	err = h.svc.ConfirmPasswordValidator(user.Password, user.ConfirmPassword)
+	if err != nil {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	err = h.svc.SignUp(&user)
 	if err != nil {
 		if err.Error() == entity.AlreadyExist {
 			h.WriteHTTPResponse(c, http.StatusBadRequest, "User with this email already exists")
@@ -98,9 +108,24 @@ func (h *Handler) ChangePassword(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
 		return
 	}
+	err := h.svc.PasswordValidator(newPassword)
+	if err != nil {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	newPasswordConfirm, ok := passwords["newPasswordConfirm"].(string)
+	if !ok {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	err = h.svc.ConfirmPasswordValidator(newPassword, newPasswordConfirm)
+	if err != nil {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
 	userId := c.Value("decodedClaims").(*entity.Claims).Sub
 	fmt.Println(oldPassword, newPassword)
-	err := h.svc.ChangePasswordByUserId(userId, oldPassword, newPassword)
+	err = h.svc.ChangePasswordByUserId(userId, oldPassword, newPassword)
 	if err != nil {
 		if err.Error() == entity.InvalidPassword {
 			h.WriteHTTPResponse(c, http.StatusBadRequest, "invalid password")
@@ -111,6 +136,10 @@ func (h *Handler) ChangePassword(c *gin.Context) {
 		return
 	}
 	h.WriteHTTPResponse(c, http.StatusOK, "password changed")
+}
+
+func (h *Handler) PasswordRecover(c *gin.Context) {
+
 }
 
 func (h *Handler) HomePageHandler(c *gin.Context) {
