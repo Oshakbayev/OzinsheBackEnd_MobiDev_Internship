@@ -17,6 +17,5 @@ func (h *Handler) AddNewSeason(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
 		return
 	}
-	movieId= 
 	err := h.svc.AddSeason()
 }
