@@ -12,6 +12,9 @@ type VideoService interface {
 
 func (s *Service) AddSeason(movieId int, videoLinks []string) error {
 	seasonId, err := s.repo.GetMaxSeason(movieId)
+	if err != nil {
+		return err
+	}
 	seasonId = seasonId + 1
 	var videos []entity.Video
 	for i, link := range videoLinks {
@@ -20,9 +23,6 @@ func (s *Service) AddSeason(movieId int, videoLinks []string) error {
 		video.SeasonId = seasonId
 		video.SeriesNumber = i + 1
 		videos = append(videos, video)
-	}
-	if err != nil {
-		return err
 	}
 	if err := s.repo.CreateMovieVideos(movieId, videos); err != nil {
 		if err2 := s.DeleteMovieById(movieId); err2 != nil {

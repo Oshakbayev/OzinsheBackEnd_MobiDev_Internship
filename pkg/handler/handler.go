@@ -25,7 +25,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	core := ginServer.Group("/core", h.AuthMiddleware())
 	{
 		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
-		core.POST("favorites", h.CreateFavoriteMovie)
+		core.POST("/favorites", h.CreateFavoriteMovie)
+		core.POST("/movie/:movieId/season/:seasonId", h.AddNewSeason)
 		core.GET("/home", h.HomePageHandler)
 		core.GET("/movies/page", h.GetAllMovies)
 		core.GET("/movie/genres", h.GetAllGenres)
