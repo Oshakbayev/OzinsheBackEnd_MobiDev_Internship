@@ -20,10 +20,10 @@ var (
 )
 
 const (
-	BucketName                   = "ozinshebucket"
 	VerificationSecretCodeLength = 16
 	Charset                      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-	PicturesLinkNameLength       = 32
+	UploadLinkNameLength         = 32
+	UploadedFilesPath            = "assets/uploads/"
 )
 
 type VerificationEmail struct {

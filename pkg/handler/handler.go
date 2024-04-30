@@ -26,7 +26,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
 		core.POST("/favorites", h.CreateFavoriteMovie)
-		core.POST("/movie/:movieId/season/:seasonId", h.AddNewSeason)
+		core.POST("/movie/:id/season/:seasonId", h.AddNewSeries)
+		core.POST("/movie/:id/season", h.AddNewSeason)
 		core.GET("/home", h.HomePageHandler)
 		core.GET("/movies/page", h.GetAllMovies)
 		core.GET("/movie/genres", h.GetAllGenres)
@@ -42,6 +43,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		core.PUT("/user/profile", h.UpdateUserProfile)
 		core.PUT("/user/profile/password", h.ChangePassword)
 		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)
+		core.DELETE("/movie/:id/season/:seasonId", h.DeleteMovieSeason)
+		core.DELETE("/movie/:id/season/:seasonId/series/:seriesId", h.DeleteMovieSeries)
 		core.DELETE("/movie/:id", h.AdminRoleMiddleware(), h.DeleteMovieById)
 		core.DELETE("/favorites/", h.DeleteFavoriteMovies)
 	}

@@ -6,11 +6,19 @@ import (
 	"log"
 	"net/http"
 	"ozinshe/pkg/entity"
+	"ozinshe/pkg/helpers"
 	"strconv"
 	"strings"
 )
 
 func (h *Handler) CreateMovie(c *gin.Context) {
+	err := c.Request.ParseMultipartForm(10 << 20) // Parse up to 10 MB of data
+	if err != nil {
+		h.log.Printf("error during ParseMultipartForm in CreateEvent(handler): %v", err)
+		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid multipart form")
+		//http.Error(w, "Error parsing multipart form", http.StatusBadRequest)
+		return
+	}
 	formData := c.Request.MultipartForm
 
 	movie := entity.Movie{}
@@ -20,16 +28,21 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		return
 	}
 	ScreenshotFileHeaders := formData.File["screenshots[]"]
-	PosterFile, _ := c.FormFile("poster")
+	movie.VideoDirectoryLink = helpers.GenerateRandomKey(entity.UploadLinkNameLength)
+	PosterFile, ok := formData.File["poster"]
+	if !ok {
+		log.Println(PosterFile)
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, "Something wrong with PosterFile")
+		return
+	}
 	VideoFileHeaders := formData.File["video[]"]
-	movie.PosterLink = "/assets/uploads/" + movie.Name + "/poster/" + PosterFile.Filename
-	if err := c.SaveUploadedFile(PosterFile, movie.PosterLink); err != nil {
+	movie.PosterLink = entity.UploadedFilesPath + helpers.GenerateRandomKey(entity.UploadLinkNameLength)
+	if err := c.SaveUploadedFile(PosterFile[0], movie.PosterLink); err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 	for _, file := range ScreenshotFileHeaders {
-		log.Println(file.Filename)
-		dst := "/assets/uploads/" + movie.Name + "/screenshots/" + file.Filename
+		dst := entity.UploadedFilesPath + helpers.GenerateRandomKey(entity.UploadLinkNameLength)
 		movie.ScreenshotLinks = append(movie.ScreenshotLinks, dst)
 		// Upload the file to specific dst
 		if err := c.SaveUploadedFile(file, dst); err != nil {
@@ -38,9 +51,7 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		}
 	}
 	for _, file := range VideoFileHeaders {
-
-		log.Println(file.Filename)
-		dst := "/assets/uploads/" + movie.Name + "/videos/" + file.Filename
+		dst := entity.UploadedFilesPath + movie.VideoDirectoryLink + "/" + helpers.GenerateRandomKey(entity.UploadLinkNameLength)
 		movie.VideoLinks = append(movie.VideoLinks, dst)
 		// Upload the file to specific dst
 		if err := c.SaveUploadedFile(file, dst); err != nil {

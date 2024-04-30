@@ -11,7 +11,6 @@ type MovieRepo interface {
 	CreateMovie(*entity.Movie) (int, error)
 	CreateMoviePoster(int, string) error
 	CreateMovieScreenshots(int, []string) error
-	CreateMovieVideos(int, []entity.Video) error
 	CreateMovieMain(*entity.MovieMain) error
 	GetMoviesByPage(limit, offset int) ([]entity.Movie, error)
 	GetMovieById(int) (*entity.Movie, error)
@@ -24,11 +23,11 @@ type MovieRepo interface {
 }
 
 func (r *RepoStruct) CreateMovie(movie *entity.Movie) (int, error) {
-	query := `INSERT INTO movie (created_date, description, director, keywords, last_modified_date, movie_type, name, producer, season_count, series_count, timing, trend, watch_count, year,poster_link) 
-              VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,$15) RETURNING id`
+	query := `INSERT INTO movie (created_date, description, director, keywords, last_modified_date, movie_type, name, producer, season_count, series_count, timing, trend, watch_count, year,poster_link,video_directory_link) 
+              VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14,$15,$16) RETURNING id`
 	var insertedID int
 	// Execute the query
-	err := r.db.QueryRow(context.Background(), query, movie.CreatedDate, movie.Description, movie.Director, movie.Keywords, movie.LastModifiedDate, movie.MovieType, movie.Name, movie.Producer, movie.SeasonCount, movie.SeriesCount, movie.Timing, movie.Trend, movie.WatchCount, movie.Year, movie.PosterLink).Scan(&insertedID)
+	err := r.db.QueryRow(context.Background(), query, movie.CreatedDate, movie.Description, movie.Director, movie.Keywords, movie.LastModifiedDate, movie.MovieType, movie.Name, movie.Producer, movie.SeasonCount, movie.SeriesCount, movie.Timing, movie.Trend, movie.WatchCount, movie.Year, movie.PosterLink, movie.VideoDirectoryLink).Scan(&insertedID)
 	if err != nil {
 		r.log.Printf("error in CreateMovie(repository):%s", err.Error())
 	}
@@ -52,42 +51,6 @@ func (r *RepoStruct) CreateMovieScreenshots(movieID int, screenshots []string) e
 		r.log.Printf("error in CreateMovieScreenshots(repository):%s", err.Error())
 	}
 	return err
-}
-
-func (r *RepoStruct) CreateMovieVideos(movieID int, videos []entity.Video) error {
-	//var values []interface{}
-	//query := `INSERT INTO video (movie_id, link, season_id, series_num) VALUES `
-	//for _, v := range videos {
-	//	query += "($1,$2,$3,$4)"
-	//	values = append(values, movieID, v.Link, v.SeasonId, v.SeriesNumber)
-	//}
-	//_, err := r.db.Exec(context.Background(), query, values...)
-	//if err != nil {
-	//	r.log.Printf("error in CreateMovieVideos(repository): %s", err.Error())
-	//}
-	//return err
-	var values []interface{}
-	query := `INSERT INTO video (movie_id, link, season_num, series_num) 
-              SELECT $1, unnest($2::text[]), unnest($3::int[]), unnest($4::int[])`
-
-	// Prepare the values for each parameter
-	links := make([]string, len(videos))
-	seasonIDs := make([]int, len(videos))
-	seriesNums := make([]int, len(videos))
-	for i, v := range videos {
-		links[i] = v.Link
-		seasonIDs[i] = v.SeasonId
-		seriesNums[i] = v.SeriesNumber
-	}
-	values = append(values, movieID, pq.Array(links), pq.Array(seasonIDs), pq.Array(seriesNums))
-
-	// Execute the query
-	_, err := r.db.Exec(context.Background(), query, values...)
-	if err != nil {
-		r.log.Printf("error in CreateMovieVideos(repository): %s", err.Error())
-	}
-	return err
-
 }
 
 func (r *RepoStruct) CreateMovieMain(movieMain *entity.MovieMain) error {
@@ -405,7 +368,7 @@ func (r *RepoStruct) GetMovieSeason(movieID, seasonId int) ([]string, error) {
 
 func (r *RepoStruct) GetMovieSeries(movieID, seriesId, seasonId int) (string, error) {
 	var link string
-	query := `SELECT link FROM video WHERE movie_id = $1, series_num = $2,season_num=$3`
+	query := `SELECT link FROM video WHERE movie_id = $1 AND series_num = $2 AND season_num=$3`
 	err := r.db.QueryRow(context.Background(), query, movieID, seriesId, seasonId).Scan(&link)
 	if err != nil {
 		r.log.Printf("error in GetMovieSeries(repository):%s", err.Error())

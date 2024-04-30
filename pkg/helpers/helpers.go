@@ -2,6 +2,7 @@ package helpers
 
 import (
 	"math/rand"
+	"os"
 	"ozinshe/pkg/entity"
 	"strconv"
 	"strings"
@@ -36,4 +37,12 @@ func StrToStrArr(str string) []string {
 		strArr = strings.Split(str, ",")
 	}
 	return strArr
+}
+
+func DeleteFile(filePath string) error {
+	err := os.Remove(filePath)
+	if err != nil {
+		return err
+	}
+	return nil
 }
