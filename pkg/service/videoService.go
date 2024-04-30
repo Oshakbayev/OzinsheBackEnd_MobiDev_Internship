@@ -12,6 +12,7 @@ type VideoService interface {
 	DeleteMovieSeason(int, int) error
 	DeleteMovieSeries(int, int, int) error
 	GetVideoDirectoryLinkByMovieId(int) (string, error)
+	UpdateSeries(int, int, int, string) error
 }
 
 func (s *Service) AddSeason(movieId int, videoLinks []string) error {
@@ -94,4 +95,8 @@ func (s *Service) DeleteMovieSeries(movieId, seasonId int, seriesId int) error {
 
 func (s *Service) GetVideoDirectoryLinkByMovieId(movieId int) (string, error) {
 	return s.repo.GetVideoDirectoryLinkByMovieId(movieId)
+}
+
+func (s *Service) UpdateSeries(movieId int, seasonId int, seriesId int, link string) error {
+	return s.repo.UpdateSeries(movieId, seasonId, seriesId, link)
 }

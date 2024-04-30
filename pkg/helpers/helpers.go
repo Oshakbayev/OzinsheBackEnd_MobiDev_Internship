@@ -46,3 +46,19 @@ func DeleteFile(filePath string) error {
 	}
 	return nil
 }
+
+func GeneratePassword() string {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
+	lowercaseLetters := "abcdefghijklmnopqrstuvwxyz"
+	uppercaseLetters := "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	digits := "0123456789"
+	specialChars := "@$!&"
+	allChars := lowercaseLetters + uppercaseLetters + digits + specialChars
+	password := ""
+	password += string(uppercaseLetters[rand.Intn(len(uppercaseLetters))])
+	for i := 0; i < 6; i++ {
+		password += string(allChars[rand.Intn(len(allChars))])
+	}
+	password += string(specialChars[rand.Intn(len(specialChars))])
+	return password
+}

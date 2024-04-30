@@ -24,19 +24,16 @@ func (h *Handler) CreateFavoriteMovie(c *gin.Context) {
 	h.WriteHTTPResponse(c, http.StatusCreated, "movie added")
 }
 
-//func (h *Handler) GetFavoriteMovies(c *gin.Context) {
-//	userId := c.Value("decodedClaims").(*entity.Claims).Sub
-//	movieIds, err := h.svc.GetUserFavoriteMovieIDs(userId)
-//	if err != nil && err.Error() != entity.ErrNoRows {
-//		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
-//		return
-//	}
-//	response := map[string]interface{}{
-//		"movieIds": movieIds,
-//	}
-//
-//	c.JSON(http.StatusOK, response)
-//}
+func (h *Handler) GetFavoriteMovies(c *gin.Context) {
+	userId := c.Value("decodedClaims").(*entity.Claims).Sub
+	movieMains, err := h.svc.GetUserFavoriteMovieIDs(userId)
+	if err != nil && err.Error() != entity.ErrNoRows {
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, movieMains)
+}
 
 func (h *Handler) DeleteFavoriteMovies(c *gin.Context) {
 	var favorite entity.Favorite

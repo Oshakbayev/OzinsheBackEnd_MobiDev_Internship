@@ -13,6 +13,7 @@ type VideoRepo interface {
 	DeleteMovieSeason(int, int) error
 	DeleteMovieSeries(int, int, int) error
 	GetVideoDirectoryLinkByMovieId(int) (string, error)
+	UpdateSeries(int, int, int, string) error
 }
 
 func (r *RepoStruct) CreateMovieVideos(movieID int, videos []entity.Video) error {
@@ -38,7 +39,7 @@ func (r *RepoStruct) CreateMovieVideos(movieID int, videos []entity.Video) error
 
 func (r *RepoStruct) GetMaxSeason(movieId int) (int, error) {
 	var seasonId int
-	query := `SELECT max(season_num) FROM video WHERE movie_id = $1`
+	query := `SELECT COALESCE(max(season_num),0) FROM video WHERE movie_id = $1`
 	err := r.db.QueryRow(context.Background(), query, movieId).Scan(&seasonId)
 	if err != nil {
 		r.log.Printf("error in GetMaxSeason(Repository): %v", err)
@@ -49,7 +50,7 @@ func (r *RepoStruct) GetMaxSeason(movieId int) (int, error) {
 
 func (r *RepoStruct) GetMaxSeriesInSeason(movieId int, seasonId int) (int, error) {
 	var seriesId int
-	query := `SELECT max(series_num) FROM video WHERE movie_id = $1 AND season_num = $2`
+	query := `SELECT COALESCE(max(series_num),0) FROM video WHERE movie_id = $1 AND season_num = $2`
 	err := r.db.QueryRow(context.Background(), query, movieId, seasonId).Scan(&seriesId)
 	if err != nil {
 		r.log.Printf("error in GetMaxSeriesInSeason(Repository): %v", err)
@@ -84,4 +85,13 @@ func (r *RepoStruct) GetVideoDirectoryLinkByMovieId(movieId int) (string, error)
 		r.log.Printf("error in GetVideoDirectoryLinkByMovieId(repository): %s", err.Error())
 	}
 	return videoDirectoryLink, err
+}
+
+func (r *RepoStruct) UpdateSeries(movieId int, seasonId int, seriesId int, link string) error {
+	query := `UPDATE video SET link = $1 WHERE movie_id  = $2 AND season_num = $3 AND series_num = $4`
+	_, err := r.db.Exec(context.Background(), query, link, movieId, seasonId, seriesId)
+	if err != nil {
+		r.log.Printf("error in UpdateSeries(repository): %s", err.Error())
+	}
+	return err
 }

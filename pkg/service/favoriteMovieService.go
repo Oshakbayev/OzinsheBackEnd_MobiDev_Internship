@@ -8,6 +8,7 @@ import (
 type FavoriteMovieService interface {
 	CreatFavoriteMovie(entity.Favorite) error
 	DeleteFavoriteMovie(entity.Favorite) error
+	GetUserFavoriteMovieIDs(int) ([]entity.MovieMain, error)
 }
 
 func (s *Service) CreatFavoriteMovie(favorite entity.Favorite) error {

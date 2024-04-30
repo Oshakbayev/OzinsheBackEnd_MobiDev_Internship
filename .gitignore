@@ -1,3 +1,4 @@
 .idea
 pkg/logs/errLogs.log
 pkg/logs/ginLogs.log
+assets

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"golang.org/x/crypto/bcrypt"
 	"ozinshe/pkg/entity"
+	"ozinshe/pkg/helpers"
 	"regexp"
 	"time"
 )
@@ -17,6 +18,7 @@ type UserService interface {
 	TokenGenerator(int, string, string) (string, error)
 	ChangePasswordByUserId(int, string, string) error
 	ConfirmPasswordValidator(string, string) error
+	PasswordRecover(email string) error
 }
 
 func (s *Service) SignUp(user *entity.User) error {
@@ -145,4 +147,19 @@ func (s *Service) ChangePasswordByUserId(userId int, oldPassword, newPassword st
 		return err
 	}
 	return s.repo.ChangePasswordByUserId(userId, string(newHashedPass))
+}
+
+func (s *Service) PasswordRecover(email string) error {
+	tempPassword := helpers.GeneratePassword()
+	tempPasswordHash, err := bcrypt.GenerateFromPassword([]byte(tempPassword), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+	emailContent := "Your new password is - " + tempPassword + " Do not share it and change immediately!"
+	err = s.repo.ChangePasswordByEmail(email, string(tempPasswordHash))
+	if err != nil {
+		return err
+	}
+	err = s.SendVerificationEmail(email, emailContent)
+	return err
 }

@@ -7,12 +7,11 @@ import (
 
 type UserProfileRepo interface {
 	GetUserProfileByUserId(int) (entity.User, error)
-	CreateUserProfile(*entity.UserProfile) error
 	UpdateUserProfile(*entity.UserProfile) error
 }
 
 func (r *RepoStruct) GetUserProfileByUserId(userId int) (entity.User, error) {
-	query := `SELECT email,username,birth_date,phone_num FROM user WHERE user_id = $1`
+	query := `SELECT email,username,birth_date,phone_num FROM users WHERE id = $1`
 	var user entity.User
 	err := r.db.QueryRow(context.Background(), query, userId).Scan(&user.Email, &user.Username, &user.BirthDate, &user.PhoneNumber)
 	if err != nil {

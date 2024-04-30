@@ -12,6 +12,8 @@ type UserRepo interface {
 	UpdateUsersEmailStatus(int) error
 	GetPasswordByUserId(int) (string, error)
 	ChangePasswordByUserId(int, string) error
+	GetUserEmailById(int) (string, error)
+	ChangePasswordByEmail(email string, newPasswordHash string) error
 }
 
 func (r *RepoStruct) CreateUser(user *entity.User) error {
@@ -32,7 +34,7 @@ func (r *RepoStruct) GetUserByEmail(email string) (*entity.User, error) {
 }
 
 func (r *RepoStruct) UpdateUserByID(user *entity.User) error {
-	_, err := r.db.Exec(context.Background(), "UPDATE users SET password_hash = $1", user.Password)
+	_, err := r.db.Exec(context.Background(), "UPDATE users SET username = $1,birth_date = $2,phone_num = $3", user.Username, user.BirthDate, user.PhoneNumber)
 	if err != nil {
 		r.log.Printf("error in UpdateUserByID(repository):%s", err.Error())
 	}
@@ -62,4 +64,21 @@ func (r *RepoStruct) ChangePasswordByUserId(userId int, newPasswordHash string) 
 		r.log.Printf("error in ChangePasswordByUserId(repository):%s", err.Error())
 	}
 	return err
+}
+
+func (r *RepoStruct) ChangePasswordByEmail(email string, newPasswordHash string) error {
+	_, err := r.db.Exec(context.Background(), "UPDATE users SET password_hash = $1 WHERE email=$2 ", newPasswordHash, email)
+	if err != nil {
+		r.log.Printf("error in ChangePasswordByUserId(repository):%s", err.Error())
+	}
+	return err
+}
+func (r *RepoStruct) GetUserEmailById(userId int) (string, error) {
+	query := `SELECT email FROM users WHERE id =$1`
+	var email string
+	err := r.db.QueryRow(context.Background(), query, userId).Scan(&email)
+	if err != nil {
+		r.log.Printf("error in GetUserEmailById(repository):%s", err.Error())
+	}
+	return email, err
 }

@@ -9,8 +9,8 @@ import (
 
 type MovieService interface {
 	CreateMovie(*entity.Movie, *multipart.Form) error
-	GetAllMovies(int, int) ([]entity.Movie, error)
-	GetMovieById(int) (*entity.Movie, error)
+	GetAllMovies(int, int, int) ([]entity.Movie, error)
+	GetMovieById(int, int) (*entity.Movie, error)
 	UpdateMovieById(*entity.Movie) error
 	DeleteMovieById(int) error
 	DeleteMovieGenreByMovieId(int) error
@@ -30,6 +30,7 @@ func (s *Service) CreateMovie(movie *entity.Movie, formData *multipart.Form) err
 	movieMain.MovieId = movieId
 	movieMain.MovieName = movie.Name
 	movieMain.PosterLink = movie.PosterLink
+	movieMain.MovieYear = movie.Year
 	if err = s.repo.CreateMovieMain(&movieMain); err != nil {
 		return err
 	}
@@ -80,12 +81,12 @@ func (s *Service) CreateMovie(movie *entity.Movie, formData *multipart.Form) err
 	return nil
 }
 
-func (s *Service) GetAllMovies(limit, offset int) ([]entity.Movie, error) {
-	return s.repo.GetMoviesByPage(limit, offset)
+func (s *Service) GetAllMovies(userid, limit, offset int) ([]entity.Movie, error) {
+	return s.repo.GetMoviesByPage(userid, limit, offset)
 }
 
-func (s *Service) GetMovieById(id int) (*entity.Movie, error) {
-	return s.repo.GetMovieById(id)
+func (s *Service) GetMovieById(userId, id int) (*entity.Movie, error) {
+	return s.repo.GetMovieById(id, userId)
 }
 
 func (s *Service) UpdateMovieById(movie *entity.Movie) error {

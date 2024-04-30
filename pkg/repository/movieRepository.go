@@ -12,8 +12,8 @@ type MovieRepo interface {
 	CreateMoviePoster(int, string) error
 	CreateMovieScreenshots(int, []string) error
 	CreateMovieMain(*entity.MovieMain) error
-	GetMoviesByPage(limit, offset int) ([]entity.Movie, error)
-	GetMovieById(int) (*entity.Movie, error)
+	GetMoviesByPage(int, int, int) ([]entity.Movie, error)
+	GetMovieById(int, int) (*entity.Movie, error)
 	UpdateMovieById(*entity.Movie) error
 	DeleteMovieById(int) error
 	DeleteMovieGenresByMovieID(int) error
@@ -54,35 +54,36 @@ func (r *RepoStruct) CreateMovieScreenshots(movieID int, screenshots []string) e
 }
 
 func (r *RepoStruct) CreateMovieMain(movieMain *entity.MovieMain) error {
-	query := `INSERT INTO movie_main (movie_id, movie_name, poster_link)  VALUES ($1, $2,$3) `
-	_, err := r.db.Exec(context.Background(), query, movieMain.MovieId, movieMain.MovieName, movieMain.PosterLink)
+	query := `INSERT INTO movie_main (movie_id, movie_name, poster_link,year)  VALUES ($1, $2,$3,$4) `
+	_, err := r.db.Exec(context.Background(), query, movieMain.MovieId, movieMain.MovieName, movieMain.PosterLink, movieMain.MovieYear)
 	if err != nil {
 		r.log.Printf("error in CreateMovieMain(repository): %s", err.Error())
 	}
 	return err
 }
 
-func (r *RepoStruct) GetMoviesByPage(limit, offset int) ([]entity.Movie, error) {
+func (r *RepoStruct) GetMoviesByPage(userId, limit, offset int) ([]entity.Movie, error) {
 	query := `SELECT 
     t1.*,
     COALESCE(categories, '{NULL}') AS categories,
-	COALESCE(category_ids, '{NULL}') AS category_ids,
+    COALESCE(category_ids, '{NULL}') AS category_ids,
     COALESCE(genres, '{NULL}') AS genres,
-	COALESCE(genre_ids, '{NULL}') AS genre_ids,
-	COALESCE(screenshot_link, '{NULL}') AS screenshot_link,
-	COALESCE(video_link, '{NULL}') AS video_link,
-	COALESCE(season_num,'{NULL}') AS season_num,
-	COALESCE(series_num,'{NULL}') AS series_num
+    COALESCE(genre_ids, '{NULL}') AS genre_ids,
+    COALESCE(screenshot_link, '{NULL}') AS screenshot_link,
+    COALESCE(video_link, '{NULL}') AS video_link,
+    COALESCE(season_num,'{NULL}') AS season_num,
+    COALESCE(series_num,'{NULL}') AS series_num,
+    CASE WHEN f.movie_id IS NOT NULL THEN true ELSE false END AS is_favorite
 FROM (
     SELECT 
         movie.*,
-		COALESCE(ARRAY_AGG(categoryage_id::int),'{NULL}') AS category_age_id,
+        COALESCE(ARRAY_AGG(categoryage_id::int),'{NULL}') AS category_age_id,
         COALESCE(ARRAY_AGG(c.name),'{NULL}') AS category_age
     FROM 
         movie
     LEFT JOIN 
         movie_categoryage AS ca ON ca.movie_id = movie.id
-	LEFT JOIN category_age AS c ON c.id = ca.categoryage_id
+    LEFT JOIN category_age AS c ON c.id = ca.categoryage_id
     GROUP BY 
         movie.id
 ) t1 
@@ -90,10 +91,10 @@ LEFT JOIN (
     SELECT 
         movie_id, 
         ARRAY_AGG(ct.name) AS categories,
-		ARRAY_AGG(category_id::int) AS category_ids
+        ARRAY_AGG(category_id::int) AS category_ids
     FROM 
         movie_category AS mc
-	LEFT JOIN category AS ct ON ct.id = mc.category_id
+    LEFT JOIN category AS ct ON ct.id = mc.category_id
     GROUP BY 
         movie_id
 ) t2 ON t1.id = t2.movie_id
@@ -101,10 +102,10 @@ LEFT JOIN (
     SELECT 
         movie_id, 
         ARRAY_AGG(g.name) AS genres,
-		ARRAY_AGG(genre_id::int) AS genre_ids
+        ARRAY_AGG(genre_id::int) AS genre_ids
     FROM 
         movie_genre AS mg
-	LEFT JOIN genre AS g ON g.id = mg.genre_id
+    LEFT JOIN genre AS g ON g.id = mg.genre_id
     GROUP BY 
         movie_id
 ) t3 ON t1.id = t3.movie_id
@@ -121,21 +122,148 @@ LEFT JOIN (
     SELECT 
         movie_id, 
         ARRAY_AGG(link) AS video_link,
-		 ARRAY_AGG(season_num) AS season_num ,
-		ARRAY_AGG(series_num) AS series_num
+        ARRAY_AGG(season_num) AS season_num ,
+        ARRAY_AGG(series_num) AS series_num
     FROM 
         video
     GROUP BY 
         movie_id
 ) t5 ON t1.id = t5.movie_id
+LEFT JOIN (
+    SELECT movie_id
+    FROM favorites
+    WHERE user_id = $1
+) f ON t1.id = f.movie_id
 ORDER BY 
     t1.id
-LIMIT $1 OFFSET $2`
-	// Execute the query
-	var movies []entity.Movie
-	rows, err := r.db.Query(context.Background(), query, limit, offset)
+LIMIT $2 OFFSET $3`
+	return r.GetMoviesByQuery(query, userId, limit, offset)
+}
+
+func (r *RepoStruct) GetMovieById(id, userId int) (*entity.Movie, error) {
+	query := `SELECT 
+    t1.*,
+    COALESCE(categories, '{NULL}') AS categories,
+    COALESCE(category_ids, '{NULL}') AS category_ids,
+    COALESCE(genres, '{NULL}') AS genres,
+    COALESCE(genre_ids, '{NULL}') AS genre_ids,
+    COALESCE(screenshot_link, '{NULL}') AS screenshot_link,
+    COALESCE(video_link, '{NULL}') AS video_link,
+    COALESCE(season_num,'{NULL}') AS season_num,
+    COALESCE(series_num,'{NULL}') AS series_num,
+    CASE WHEN f.movie_id IS NOT NULL THEN true ELSE false END AS is_favorite
+FROM (
+    SELECT 
+        movie.*,
+        COALESCE(ARRAY_AGG(categoryage_id::int),'{NULL}') AS category_age_id,
+        COALESCE(ARRAY_AGG(c.name),'{NULL}') AS category_age
+    FROM 
+        movie
+    LEFT JOIN 
+        movie_categoryage AS ca ON ca.movie_id = movie.id
+    LEFT JOIN category_age AS c ON c.id = ca.categoryage_id
+    WHERE movie.id = $1 -- Filter by movie id
+    GROUP BY 
+        movie.id
+) t1 
+LEFT JOIN (
+    SELECT 
+        movie_id, 
+        ARRAY_AGG(ct.name) AS categories,
+        ARRAY_AGG(category_id::int) AS category_ids
+    FROM 
+        movie_category AS mc
+    LEFT JOIN category AS ct ON ct.id = mc.category_id
+    GROUP BY 
+        movie_id
+) t2 ON t1.id = t2.movie_id
+LEFT JOIN (
+    SELECT 
+        movie_id, 
+        ARRAY_AGG(g.name) AS genres,
+        ARRAY_AGG(genre_id::int) AS genre_ids
+    FROM 
+        movie_genre AS mg
+    LEFT JOIN genre AS g ON g.id = mg.genre_id
+    GROUP BY 
+        movie_id
+) t3 ON t1.id = t3.movie_id
+LEFT JOIN (
+    SELECT 
+        movie_id, 
+        ARRAY_AGG(link) AS screenshot_link
+    FROM 
+        screenshot
+    GROUP BY 
+        movie_id
+) t4 ON t1.id = t4.movie_id
+LEFT JOIN (
+    SELECT 
+        movie_id, 
+        ARRAY_AGG(link) AS video_link,
+        ARRAY_AGG(season_num) AS season_num ,
+        ARRAY_AGG(series_num) AS series_num
+    FROM 
+        video
+    GROUP BY 
+        movie_id
+) t5 ON t1.id = t5.movie_id
+LEFT JOIN (
+    SELECT movie_id
+    FROM favorites
+    WHERE user_id = $2
+) f ON t1.id = f.movie_id
+ORDER BY 
+    t1.id
+`
+	movie := entity.Movie{}
+	var isFavorite bool
+	var screenshotLinks, videoLinks, categories, categoryAges, genres []string
+	var categoryAgeIds, categoryIds, genreIds, videoSeason, videoSeries []int
+	err := r.db.QueryRow(context.Background(), query, id, userId).Scan(&movie.Id, &movie.CreatedDate, &movie.Description, &movie.Director, &movie.Keywords, &movie.LastModifiedDate, &movie.MovieType, &movie.Name, &movie.Producer, &movie.SeasonCount, &movie.SeriesCount, &movie.Timing, &movie.Trend, &movie.WatchCount, &movie.Year, &movie.PosterLink, &movie.VideoDirectoryLink, &categoryAgeIds, &categoryAges, &categories, &categoryIds, &genres, &genreIds, &screenshotLinks, &videoLinks, &videoSeason, &videoSeries, &isFavorite)
 	if err != nil {
 		r.log.Printf("error in GetAllMovies(repository):%s", err.Error())
+		return nil, err
+	}
+	movie.IsFavorite = isFavorite
+	movie.CategoryIDs = categoryIds
+	for i, val := range categories {
+		category := entity.Category{}
+		category.Name = val
+		category.Id = categoryIds[i]
+		movie.Categories = append(movie.Categories, category)
+	}
+
+	for i, val := range categoryAges {
+		categoryAge := entity.CategoryAge{}
+		categoryAge.Name = val
+		categoryAge.Id = categoryAgeIds[i]
+		movie.CategoryAges = append(movie.CategoryAges, categoryAge)
+	}
+	for i, val := range genres {
+		genre := entity.Genre{}
+		genre.Name = val
+		genre.Id = genreIds[i]
+		movie.Genres = append(movie.Genres, genre)
+	}
+	movie.CategoryAgeIDs = categoryAgeIds
+	movie.GenreIDs = genreIds
+	movie.ScreenshotLinks = screenshotLinks
+	for i, val := range videoLinks {
+		video := entity.Video{}
+		video.Link = val
+		video.SeasonId = videoSeason[i]
+		video.SeriesNumber = videoSeries[i]
+		movie.Videos = append(movie.Videos, video)
+	}
+	return &movie, err
+}
+
+func (r *RepoStruct) GetMoviesByQuery(query string, params ...any) ([]entity.Movie, error) {
+	var movies []entity.Movie
+	rows, err := r.db.Query(context.Background(), query, params...)
+	if err != nil {
+		r.log.Printf("error in GetMoviesByQuery(repository):%s", err.Error())
 		return nil, err
 	}
 
@@ -144,13 +272,15 @@ LIMIT $1 OFFSET $2`
 		fmt.Println(rows.Values())
 		fmt.Println("-----------------")
 		movie := entity.Movie{}
+		var isFavorite bool
 		var screenshotLinks, videoLinks, categories, categoryAges, genres []string
 		var categoryAgeIds, categoryIds, genreIds, videoSeason, videoSeries []int
-		err := rows.Scan(&movie.Id, &movie.CreatedDate, &movie.Description, &movie.Director, &movie.Keywords, &movie.LastModifiedDate, &movie.MovieType, &movie.Name, &movie.Producer, &movie.SeasonCount, &movie.SeriesCount, &movie.Timing, &movie.Trend, &movie.WatchCount, &movie.Year, &movie.PosterLink, &categoryAgeIds, &categoryAges, &categories, &categoryIds, &genres, &genreIds, &screenshotLinks, &videoLinks, &videoSeason, &videoSeries)
+		err := rows.Scan(&movie.Id, &movie.CreatedDate, &movie.Description, &movie.Director, &movie.Keywords, &movie.LastModifiedDate, &movie.MovieType, &movie.Name, &movie.Producer, &movie.SeasonCount, &movie.SeriesCount, &movie.Timing, &movie.Trend, &movie.WatchCount, &movie.Year, &movie.PosterLink, &movie.VideoDirectoryLink, &categoryAgeIds, &categoryAges, &categories, &categoryIds, &genres, &genreIds, &screenshotLinks, &videoLinks, &videoSeason, &videoSeries, &isFavorite)
 		if err != nil {
-			r.log.Printf("error in GetAllMovies(repository):%s", err.Error())
+			r.log.Printf("error in GetMoviesByQuery(repository):%s", err.Error())
 			return nil, err
 		}
+		movie.IsFavorite = isFavorite
 		movie.CategoryIDs = categoryIds
 		for i, val := range categories {
 			category := entity.Category{}
@@ -185,118 +315,6 @@ LIMIT $1 OFFSET $2`
 	}
 	return movies, err
 }
-
-func (r *RepoStruct) GetMovieById(id int) (*entity.Movie, error) {
-	query := `SELECT 
-    t1.*,
-    COALESCE(categories, '{NULL}') AS categories,
-	COALESCE(category_ids, '{NULL}') AS category_ids,
-    COALESCE(genres, '{NULL}') AS genres,
-	COALESCE(genre_ids, '{NULL}') AS genre_ids,
-	COALESCE(screenshot_link, '{NULL}') AS screenshot_link,
-	COALESCE(video_link, '{NULL}') AS video_link,
-	COALESCE(season_num,'{NULL}') AS season_num,
-	COALESCE(series_num,'{NULL}') AS series_num
-FROM (
-    SELECT 
-        movie.*,
-		COALESCE(ARRAY_AGG(categoryage_id::int),'{NULL}') AS category_age_id,
-        COALESCE(ARRAY_AGG(c.name),'{NULL}') AS category_age
-    FROM 
-        movie
-    LEFT JOIN 
-        movie_categoryage AS ca ON ca.movie_id = movie.id
-	LEFT JOIN category_age AS c ON c.id = ca.categoryage_id
-    GROUP BY 
-        movie.id
-) t1 
-LEFT JOIN (
-    SELECT 
-        movie_id, 
-        ARRAY_AGG(ct.name) AS categories,
-		ARRAY_AGG(category_id::int) AS category_ids
-    FROM 
-        movie_category AS mc
-	LEFT JOIN category AS ct ON ct.id = mc.category_id
-    GROUP BY 
-        movie_id
-) t2 ON t1.id = t2.movie_id
-LEFT JOIN (
-    SELECT 
-        movie_id, 
-        ARRAY_AGG(g.name) AS genres,
-		ARRAY_AGG(genre_id::int) AS genre_ids
-    FROM 
-        movie_genre AS mg
-	LEFT JOIN genre AS g ON g.id = mg.genre_id
-    GROUP BY 
-        movie_id
-) t3 ON t1.id = t3.movie_id
-LEFT JOIN (
-    SELECT 
-        movie_id, 
-        ARRAY_AGG(link) AS screenshot_link
-    FROM 
-        screenshot
-    GROUP BY 
-        movie_id
-) t4 ON t1.id = t4.movie_id
-LEFT JOIN (
-    SELECT 
-        movie_id, 
-        ARRAY_AGG(link) AS video_link,
-		 ARRAY_AGG(season_num) AS season_num ,
-		ARRAY_AGG(series_num) AS series_num
-    FROM 
-        video
-    GROUP BY 
-        movie_id
-) t5 ON t1.id = t5.movie_id
-Where t1.id = $1
-ORDER BY 
-    t1.id
-`
-	movie := entity.Movie{}
-	var screenshotLinks, videoLinks, categories, categoryAges, genres []string
-	var categoryAgeIds, categoryIds, genreIds, videoSeason, videoSeries []int
-	err := r.db.QueryRow(context.Background(), query, id).Scan(&movie.Id, &movie.CreatedDate, &movie.Description, &movie.Director, &movie.Keywords, &movie.LastModifiedDate, &movie.MovieType, &movie.Name, &movie.Producer, &movie.SeasonCount, &movie.SeriesCount, &movie.Timing, &movie.Trend, &movie.WatchCount, &movie.Year, &movie.PosterLink, &categoryAgeIds, &categoryAges, &categories, &categoryIds, &genres, &genreIds, &screenshotLinks, &videoLinks, &videoSeason, &videoSeries)
-	if err != nil {
-		r.log.Printf("error in GetAllMovies(repository):%s", err.Error())
-		return nil, err
-	}
-	movie.CategoryIDs = categoryIds
-	for i, val := range categories {
-		category := entity.Category{}
-		category.Name = val
-		category.Id = categoryIds[i]
-		movie.Categories = append(movie.Categories, category)
-	}
-
-	for i, val := range categoryAges {
-		categoryAge := entity.CategoryAge{}
-		categoryAge.Name = val
-		categoryAge.Id = categoryAgeIds[i]
-		movie.CategoryAges = append(movie.CategoryAges, categoryAge)
-	}
-	for i, val := range genres {
-		genre := entity.Genre{}
-		genre.Name = val
-		genre.Id = genreIds[i]
-		movie.Genres = append(movie.Genres, genre)
-	}
-	movie.CategoryAgeIDs = categoryAgeIds
-	movie.GenreIDs = genreIds
-	movie.ScreenshotLinks = screenshotLinks
-	for i, val := range videoLinks {
-		video := entity.Video{}
-		video.Link = val
-		video.SeasonId = videoSeason[i]
-		video.SeriesNumber = videoSeries[i]
-		movie.Videos = append(movie.Videos, video)
-	}
-	return &movie, err
-}
-
 func (r *RepoStruct) UpdateMovieById(movie *entity.Movie) error {
 	query := `UPDATE movie 
 SET 
@@ -413,7 +431,7 @@ func (r *RepoStruct) GetMovieMainsByQuery(query string, params ...any) ([]entity
 	}
 	for rows.Next() {
 		var movieMain entity.MovieMain
-		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieYear, &movieMain.MovieGenres)
+		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieYear, &movieMain.MovieGenres, &movieMain.IsFavorite)
 		if err != nil {
 			r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
 			return nil, err

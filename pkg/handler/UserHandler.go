@@ -139,7 +139,18 @@ func (h *Handler) ChangePassword(c *gin.Context) {
 }
 
 func (h *Handler) PasswordRecover(c *gin.Context) {
-
+	var emailMap map[string]interface{}
+	if err := c.BindJSON(&emailMap); err != nil {
+		h.WriteHTTPResponse(c, http.StatusBadRequest, "Invalid input body")
+		return
+	}
+	email := emailMap["email"].(string)
+	err := h.svc.PasswordRecover(email)
+	if err != nil {
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	h.WriteHTTPResponse(c, http.StatusOK, "email with new password has sent")
 }
 
 func (h *Handler) HomePageHandler(c *gin.Context) {

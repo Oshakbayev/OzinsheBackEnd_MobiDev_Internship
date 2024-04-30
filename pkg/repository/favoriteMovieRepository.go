@@ -22,7 +22,37 @@ func (r *RepoStruct) CreatFavoriteMovie(favorite entity.Favorite) error {
 }
 
 func (r *RepoStruct) GetUserFavoriteMovieMains(userId int) ([]entity.MovieMain, error) {
-	query := `SELECT * FROM movie WHERE user_id = $1`
+	query := `SELECT 
+	t1.id,
+	t1.movie_id,
+	t1.movie_name,
+	t1.poster_link,
+	t1.year,
+	t1.genre_names,
+	t1.is_favorite
+FROM(	
+	SELECT 
+		mm.*,
+		ARRAY_AGG(g.name) AS genre_names,
+		ARRAY_AGG(g.id) AS genre_ids,
+		CASE WHEN f.movie_id IS NOT NULL THEN true ELSE false END AS is_favorite
+	FROM 
+		movie_genre AS mg
+	LEFT JOIN 
+		movie_main AS mm ON mm.movie_id = mg.movie_id
+	LEFT JOIN 
+		genre AS g ON g.id = mg.genre_id	
+	LEFT JOIN (
+    	SELECT movie_id
+    	FROM favorites
+    	WHERE user_id = $1
+	) f ON mm.movie_id = f.movie_id
+	GROUP BY 
+		mm.id, f.movie_id
+) AS t1
+WHERE 
+	t1.is_favorite = true;
+`
 	return r.GetMovieMainsByQuery(query, userId)
 }
 

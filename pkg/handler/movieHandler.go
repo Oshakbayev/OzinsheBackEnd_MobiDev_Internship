@@ -28,7 +28,7 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		return
 	}
 	ScreenshotFileHeaders := formData.File["screenshots[]"]
-	movie.VideoDirectoryLink = helpers.GenerateRandomKey(entity.UploadLinkNameLength)
+	movie.VideoDirectoryLink = entity.UploadedFilesPath + helpers.GenerateRandomKey(entity.UploadLinkNameLength)
 	PosterFile, ok := formData.File["poster"]
 	if !ok {
 		log.Println(PosterFile)
@@ -51,7 +51,7 @@ func (h *Handler) CreateMovie(c *gin.Context) {
 		}
 	}
 	for _, file := range VideoFileHeaders {
-		dst := entity.UploadedFilesPath + movie.VideoDirectoryLink + "/" + helpers.GenerateRandomKey(entity.UploadLinkNameLength)
+		dst := movie.VideoDirectoryLink + "/" + helpers.GenerateRandomKey(entity.UploadLinkNameLength)
 		movie.VideoLinks = append(movie.VideoLinks, dst)
 		// Upload the file to specific dst
 		if err := c.SaveUploadedFile(file, dst); err != nil {
@@ -80,7 +80,8 @@ func (h *Handler) GetAllMovies(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "offset is not a number")
 		return
 	}
-	movies, err := h.svc.GetAllMovies(limit, offset)
+	userId := c.Value("decodedClaims").(*entity.Claims).Sub
+	movies, err := h.svc.GetAllMovies(userId, limit, offset)
 	if err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return
@@ -96,7 +97,8 @@ func (h *Handler) GetMovieById(c *gin.Context) {
 		h.WriteHTTPResponse(c, http.StatusBadRequest, "movieId is not a number")
 		return
 	}
-	movie, err := h.svc.GetMovieById(movieID)
+	userId := c.Value("decodedClaims").(*entity.Claims).Sub
+	movie, err := h.svc.GetMovieById(userId, movieID)
 	if err != nil {
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
 		return

@@ -26,8 +26,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 	{
 		core.POST("/movie", h.AdminRoleMiddleware(), h.CreateMovie)
 		core.POST("/favorites", h.CreateFavoriteMovie)
-		core.POST("/movie/:id/season/:seasonId", h.AddNewSeries)
-		core.POST("/movie/:id/season", h.AddNewSeason)
+		core.POST("/movie/:id/season/:seasonId", h.AdminRoleMiddleware(), h.AddNewSeries)
+		core.POST("/movie/:id/season", h.AdminRoleMiddleware(), h.AddNewSeason)
 		core.GET("/home", h.HomePageHandler)
 		core.GET("/movies/page", h.GetAllMovies)
 		core.GET("/movie/genres", h.GetAllGenres)
@@ -39,12 +39,14 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		core.GET("/user/profile", h.GetUserProfile)
 		core.GET("/movieMain/search", h.GetMovieMainsByTitle)
 		core.GET("/movieMain/search/genre", h.GetMovieMainsByGenre)
-		//core.GET("/favorites/", h.GetFavoriteMovies)
+		core.GET("/favorites/", h.GetFavoriteMovies)
 		core.PUT("/user/profile", h.UpdateUserProfile)
 		core.PUT("/user/profile/password", h.ChangePassword)
 		core.PUT("/movie/:id", h.AdminRoleMiddleware(), h.UpdateMovieById)
-		core.DELETE("/movie/:id/season/:seasonId", h.DeleteMovieSeason)
-		core.DELETE("/movie/:id/season/:seasonId/series/:seriesId", h.DeleteMovieSeries)
+		core.PUT("/movie/:id/season/:seasonId", h.AdminRoleMiddleware(), h.UpdateSeason)
+		core.PUT("/movie/:id/season/:seasonId/series/:seriesId", h.AdminRoleMiddleware(), h.UpdateSeries)
+		core.DELETE("/movie/:id/season/:seasonId", h.AdminRoleMiddleware(), h.DeleteMovieSeason)
+		core.DELETE("/movie/:id/season/:seasonId/series/:seriesId", h.AdminRoleMiddleware(), h.DeleteMovieSeries)
 		core.DELETE("/movie/:id", h.AdminRoleMiddleware(), h.DeleteMovieById)
 		core.DELETE("/favorites/", h.DeleteFavoriteMovies)
 	}
@@ -53,6 +55,7 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		auth.POST("/sign-up", h.SignUp)
 		auth.GET("/verifyAccount", h.VerifyAccount)
 		auth.POST("/sign-in", h.SignIn)
+		auth.POST("/passwordRecover", h.PasswordRecover)
 	}
 	ginServer.GET("/swagger", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return ginServer

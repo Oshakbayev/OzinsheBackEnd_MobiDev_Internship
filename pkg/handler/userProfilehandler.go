@@ -28,21 +28,11 @@ func (h *Handler) UpdateUserProfile(c *gin.Context) {
 	}
 	claims := c.Value("decodedClaims").(*entity.Claims)
 	userProfile.UserId = claims.Sub
-	_, err := h.svc.GetUserProfileByUserId(claims.Sub)
-	if err != nil && err.Error() == entity.ErrNoRows {
-		err = h.svc.CreateUserProfile(&userProfile)
-		if err != nil {
-			h.log.Print("error in UserProfile(handler) during create userProfile")
-			h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
-			return
-		}
-	} else if err == nil {
-		err = h.svc.UpdateUserProfile(&userProfile)
-		if err != nil {
-			h.log.Print("error in UserProfile(handler) during create userProfile")
-			h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
-			return
-		}
+	err := h.svc.UpdateUserProfile(&userProfile)
+	if err != nil {
+		h.log.Print("error in UserProfile(handler) during create userProfile")
+		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())
+		return
 	}
 	h.WriteHTTPResponse(c, http.StatusOK, "user information updated")
 }

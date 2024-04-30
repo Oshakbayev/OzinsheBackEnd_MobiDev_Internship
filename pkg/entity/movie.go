@@ -7,8 +7,9 @@ type MovieMain struct {
 	MovieId     int
 	MovieName   string
 	MovieGenres []string
-	MovieYear   string
+	MovieYear   int
 	PosterLink  string
+	IsFavorite  bool
 }
 
 type Movie struct {
@@ -40,6 +41,7 @@ type Movie struct {
 	WatchCount         int
 	Year               int `json:"year"`
 	VideoDirectoryLink string
+	IsFavorite         bool
 }
 
 type Favorite struct {
