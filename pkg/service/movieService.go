@@ -16,7 +16,7 @@ type MovieService interface {
 	DeleteMovieGenreByMovieId(int) error
 	GetMovieSeason(int, int) ([]string, error)
 	GetMovieSeries(int, int, int) (string, error)
-	GetMovieMainsByTitle(string) ([]entity.MovieMain, error)
+	GetMovieMainsByTitle(int, string) ([]entity.MovieMain, error)
 }
 
 func (s *Service) CreateMovie(movie *entity.Movie, formData *multipart.Form) error {
@@ -109,7 +109,7 @@ func (s *Service) GetMovieSeries(movieId, seriesId, seasonId int) (string, error
 	return s.repo.GetMovieSeries(movieId, seriesId, seasonId)
 }
 
-func (s *Service) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
+func (s *Service) GetMovieMainsByTitle(userId int, title string) ([]entity.MovieMain, error) {
 	//title = strings.ToLower(title)
-	return s.repo.GetMovieMainsByTitle(title)
+	return s.repo.GetMovieMainsByTitle(userId, title)
 }

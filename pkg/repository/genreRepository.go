@@ -3,14 +3,13 @@ package repository
 import (
 	"context"
 	"github.com/lib/pq"
-	"log"
 	"ozinshe/pkg/entity"
 )
 
 type GenreRepo interface {
 	CreateMovieGenres(int, []int) error
 	GetAllGenres() ([]entity.Genre, error)
-	GetMovieMainsByGenre(int) ([]entity.MovieMain, error)
+	GetMovieMainsByGenre(int, int) ([]entity.MovieMain, error)
 }
 
 func (r *RepoStruct) CreateMovieGenres(movieID int, genreIDs []int) error {
@@ -43,14 +42,15 @@ func (r *RepoStruct) GetAllGenres() ([]entity.Genre, error) {
 	return allGenres, err
 }
 
-func (r *RepoStruct) GetMovieMainsByGenre(genreId int) ([]entity.MovieMain, error) {
-	log.Println(genreId, "--------------------------------")
+func (r *RepoStruct) GetMovieMainsByGenre(userId, genreId int) ([]entity.MovieMain, error) {
 	query := `SELECT 
 	t1.id,
 	t1.movie_id,
 	t1.movie_name,
 	t1.poster_link,
-	t1.genre_names
+	t1.year,
+	t1.genre_names,
+	CASE WHEN f.movie_id IS NOT NULL THEN true ELSE false END AS is_favorite
 FROM(	
 SELECT 
 		mm.*,
@@ -64,21 +64,11 @@ SELECT
 	GROUP BY 
 		mm.id
 ) AS t1
-WHERE $1 = ANY(t1.genre_ids)`
-	rows, err := r.db.Query(context.Background(), query, genreId)
-	if err != nil {
-		r.log.Printf("error in GetMovieMainsByGenre(repository):%s", err.Error())
-		return nil, err
-	}
-	var movieMains []entity.MovieMain
-	for rows.Next() {
-		var movieMain entity.MovieMain
-		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieGenres)
-		if err != nil {
-			r.log.Printf("error in GetMovieMainByMovieIds(repository):%s", err.Error())
-			return nil, err
-		}
-		movieMains = append(movieMains, movieMain)
-	}
-	return movieMains, err
+LEFT JOIN (
+    SELECT movie_id
+    FROM favorites
+    WHERE user_id = $1
+) f ON t1.id = f.movie_id
+WHERE $2 = ANY(t1.genre_ids)`
+	return r.GetMovieMainsByQuery(query, userId, genreId)
 }

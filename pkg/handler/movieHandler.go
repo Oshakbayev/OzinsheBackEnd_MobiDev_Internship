@@ -147,6 +147,7 @@ func (h *Handler) DeleteMovieById(c *gin.Context) {
 func (h *Handler) GetMovieSeasonById(c *gin.Context) {
 	seasonId := c.Param("seasonId")
 	movieId := c.Param("id")
+
 	intSeasonId, err := strconv.Atoi(seasonId)
 	if err != nil {
 		h.log.Print("seasonId is not a number")
@@ -199,8 +200,9 @@ func (h *Handler) GetMovieSeriesById(c *gin.Context) {
 
 func (h *Handler) GetMovieMainsByTitle(c *gin.Context) {
 	params := c.Request.URL.Query()
+	userId := c.Value("decodedClaims").(*entity.Claims).Sub
 	title := params.Get("title")
-	movieMains, err := h.svc.GetMovieMainsByTitle(title)
+	movieMains, err := h.svc.GetMovieMainsByTitle(userId, title)
 	if err != nil {
 		h.log.Print("error in GetMovieMainsByTitle(handler)")
 		h.WriteHTTPResponse(c, http.StatusInternalServerError, err.Error())

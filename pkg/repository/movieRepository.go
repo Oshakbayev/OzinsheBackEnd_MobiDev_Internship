@@ -19,7 +19,7 @@ type MovieRepo interface {
 	DeleteMovieGenresByMovieID(int) error
 	GetMovieSeason(movieID, seasonId int) ([]string, error)
 	GetMovieSeries(movieID, seriesId, seasonId int) (string, error)
-	GetMovieMainsByTitle(string) ([]entity.MovieMain, error)
+	GetMovieMainsByTitle(int, string) ([]entity.MovieMain, error)
 }
 
 func (r *RepoStruct) CreateMovie(movie *entity.Movie) (int, error) {
@@ -395,7 +395,7 @@ func (r *RepoStruct) GetMovieSeries(movieID, seriesId, seasonId int) (string, er
 
 }
 
-func (r *RepoStruct) GetMovieMainsByTitle(title string) ([]entity.MovieMain, error) {
+func (r *RepoStruct) GetMovieMainsByTitle(userId int, title string) ([]entity.MovieMain, error) {
 
 	title = "%" + title + "%"
 	query := `SELECT 
@@ -403,8 +403,9 @@ func (r *RepoStruct) GetMovieMainsByTitle(title string) ([]entity.MovieMain, err
 	t1.movie_id,
 	t1.movie_name,
 	t1.poster_link,
-	t1.MovieYear,
-	t1.genre_names
+	t1.year,
+	t1.genre_names,
+	CASE WHEN f.movie_id IS NOT NULL THEN true ELSE false END AS is_favorite
 FROM(	
 SELECT 
 		mm.*,
@@ -418,22 +419,27 @@ SELECT
 	GROUP BY 
 		mm.id
 ) AS t1
-WHERE  t1.movie_name ILIKE  $1`
-	return r.GetMovieMainsByQuery(query, title)
+LEFT JOIN (
+    SELECT movie_id
+    FROM favorites
+    WHERE user_id = $1
+) f ON t1.id = f.movie_id
+WHERE  t1.movie_name ILIKE  $2`
+	return r.GetMovieMainsByQuery(query, userId, title)
 }
 
 func (r *RepoStruct) GetMovieMainsByQuery(query string, params ...any) ([]entity.MovieMain, error) {
 	var movieMains []entity.MovieMain
 	rows, err := r.db.Query(context.Background(), query, params...)
 	if err != nil {
-		r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
+		r.log.Printf("error in GetMovieMainsByQuery(repository):%s", err.Error())
 		return nil, err
 	}
 	for rows.Next() {
 		var movieMain entity.MovieMain
 		err := rows.Scan(&movieMain.Id, &movieMain.MovieId, &movieMain.MovieName, &movieMain.PosterLink, &movieMain.MovieYear, &movieMain.MovieGenres, &movieMain.IsFavorite)
 		if err != nil {
-			r.log.Printf("error in GetMoviesByTitle(repository):%s", err.Error())
+			r.log.Printf("error in GetMovieMainsByQuery(repository):%s", err.Error())
 			return nil, err
 		}
 		movieMains = append(movieMains, movieMain)

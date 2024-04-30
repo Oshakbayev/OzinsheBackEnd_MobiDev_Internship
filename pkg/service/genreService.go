@@ -4,13 +4,13 @@ import "ozinshe/pkg/entity"
 
 type GenreSerivce interface {
 	GetAllGenres() ([]entity.Genre, error)
-	GetMovieMainsByGenre(int) ([]entity.MovieMain, error)
+	GetMovieMainsByGenre(int, int) ([]entity.MovieMain, error)
 }
 
 func (s *Service) GetAllGenres() ([]entity.Genre, error) {
 	return s.repo.GetAllGenres()
 }
 
-func (s *Service) GetMovieMainsByGenre(genreId int) ([]entity.MovieMain, error) {
-	return s.repo.GetMovieMainsByGenre(genreId)
+func (s *Service) GetMovieMainsByGenre(userId int, genreId int) ([]entity.MovieMain, error) {
+	return s.repo.GetMovieMainsByGenre(userId, genreId)
 }

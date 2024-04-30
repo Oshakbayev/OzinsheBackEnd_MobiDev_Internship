@@ -3,13 +3,14 @@ package entity
 import "time"
 
 type MovieMain struct {
-	Id          int
-	MovieId     int
-	MovieName   string
-	MovieGenres []string
-	MovieYear   int
-	PosterLink  string
-	IsFavorite  bool
+	Id           int
+	MovieId      int
+	MovieName    string
+	MovieGenres  []string
+	MovieYear    int
+	PosterLink   string
+	IsFavorite   bool
+	CategoryName string
 }
 
 type Movie struct {
